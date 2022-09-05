@@ -11,6 +11,8 @@ body{
     width: 100%;
     height: 100vh;
 }
+
+/* estilos para la vista login */
 .login-form{
     max-width: 450px;
     height: auto;
@@ -32,6 +34,7 @@ body{
     cursor: pointer;
 }
 
+/* estilos para la vista registro */
 
 .singUp-form{
     max-width: 500px;
@@ -49,4 +52,10 @@ body{
     left: 90%;
 }
 
+
+/* estilos para la vista principal */
+
+.nav-main{
+    background-color:rgba(68, 186, 186, 0.432);
+}
 
