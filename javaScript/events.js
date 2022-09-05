@@ -1,6 +1,5 @@
 export function eventPasswordLogin(){
     const inputPassword = document.getElementById("password")
-    const iconPassword = document.querySelector(".bi-eye")
     
     iconPassword.classList.replace("bi-eye-slash" , "bi-eye")
 
