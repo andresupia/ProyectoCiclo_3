@@ -4,10 +4,6 @@ let iconEmail = document.querySelector(".bi-envelope")
 let emailInput= document.querySelector(".email")
 
 
-
-
-
-
 emailInput.addEventListener("keyup",()=>{
     let pattern =/^[^ ]+@[^ ]+\.[a-z]{2,3}$/; 
     if(emailInput.value===""){
@@ -26,7 +22,6 @@ emailInput.addEventListener("keyup",()=>{
 
 
 // evento en el  icono del input password  en la  vista login
-
 let iconPassword ;
 
 Promise.resolve( iconPassword = document.querySelector(".bi-eye"))
@@ -37,4 +32,7 @@ Promise.resolve( iconPassword = document.querySelector(".bi-eye"))
     })
 })
 .catch(error => console.log(error))
+
+
+
 

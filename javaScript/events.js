@@ -1,3 +1,5 @@
+
+// evento  sobre el icono del  input password
 export function eventPasswordLogin(){
     const inputPassword = document.getElementById("password")
     

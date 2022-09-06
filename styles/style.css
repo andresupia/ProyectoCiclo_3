@@ -53,9 +53,51 @@ body{
 }
 
 
-/* estilos para la vista principal */
-
 .nav-main{
     background-color:rgba(68, 186, 186, 0.432);
 }
 
+.list-options li:hover{
+    transform: scale(1.02 ,1.02);
+    background-color: rgba(68, 186, 186, 0.432);   
+    border-radius: 8px;     
+}
+
+.list-options-dropdown li{
+    margin: 0 10px;
+}
+
+.list-options-dropdown a:hover{
+    border-radius: 8px;
+    background-color: rgba(68, 186, 186, 0.432);
+}
+
+
+.container-añadir-libro{
+    margin: none;
+    max-width: 300px;
+    min-width: 300px;
+     border-radius: 20px; 
+     background: rgb(244, 243, 243);
+    display: none;
+
+}
+.container-añadir-libro h4{
+    background-color:rgba(68, 186, 186, 0.432);
+    border-radius: 12px;
+}
+
+.open-container{
+    display: block;
+}
+
+@media(min-width:768px){
+    .container-añadir-libro{
+        position: absolute;
+    
+
+        left: 100%;
+        transform: translateX(-100%);
+       border-radius: 20px 0 0 20px;
+    }
+}

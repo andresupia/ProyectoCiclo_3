@@ -19,32 +19,72 @@
             <span class="navbar-toggler-icon"></span>
           </button>
            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown ">
+            
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 list-options">
+                
+                <li class="nav-item dropdown me-4 ">
+                  
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Perfil
                   </a>
-                  <ul class="dropdown-menu list-options"  id="">
+
+                  <ul class="dropdown-menu list-options-dropdown"  id="">
                     <li><a class="dropdown-item" href="#">Action</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Cerrar sección</a></li>
                   </ul>
+
+
                 </li>
-                <li class="nav-item  mx-3 ">
+
+                <li class="nav-item me-4">
                     <a class="nav-link " href="#">Prestamos</a>
                 </li>
-                <li class="nav-item mx-3">
-                    <a class="nav-link " href="#">Añadir libro</a>
+
+                <li class="nav-item ">
+                    <a class=" nav-link" href="#">Añadir libro</a>
               </li>
+
             </ul>
+
             <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Tus libros" aria-label="Search">
+              <input class="form-control me-2 button-search" type="search" placeholder="Tus libros ..." aria-label="Search">
               <button class="btn btn-outline-dark" type="submit">Buscar</button>
             </form>
           </div>
         </div>
       </nav>
+
+      <section class="container container-añadir-libro mt-4 border p-2  open-container">
+        <h4 class="p-2  text-white ">Añadir libro</h4>
+        <form action="#" role="form" class="">
+          
+          <div class="mb-2">
+            <label for="nombre-libro" class="form-label ps-1 m-0">Nombre </label>
+            <input  class="form-control" type="text" id="nombre-libro" name="nombre-libro">
+          </div>
+
+          <div class="mb-2">
+            <label for="autor-libro" class="form-label ps-1 m-0">Autor </label>
+            <input  class="form-control" type="text" id="autor-libro" name="autor-libro">
+          </div>
+          
+          <div class="mb-2">
+            <label for="editorial-libro" class="form-label  ps-1 m-0">Editotial</label>
+            <input  class="form-control" type="text" id="editorial-libro" name="editorial-libro">
+          </div>
+          
+          <div>
+            <label for="cantidad-libro" class="form-label ps-1 m-0">Cantidad </label>
+            <input  class="form-control" type="number" id="cantidad-libro" name="cantidad-libro">
+          </div>
+          
+          <button type="submit" class="btn btn-success mt-4">Añadir</button>
+          <button type="button" class="btn btn-primary mt-4 float-end">Cancelar</button>
+        </form>
+      </section>
+
 
 
     <!-- JavaScript bootstrap -->
