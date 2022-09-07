@@ -72,6 +72,10 @@ body{
     background-color: rgba(68, 186, 186, 0.432);
 }
 
+.botton-añadir-libro{
+    cursor: pointer;
+}
+
 
 .container-añadir-libro{
     margin: none;
@@ -87,7 +91,7 @@ body{
     border-radius: 12px;
 }
 
-.open-container{
+.open-container-añadir{
     display: block;
 }
 
