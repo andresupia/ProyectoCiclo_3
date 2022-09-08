@@ -1,54 +1,23 @@
-
-// Evento sobre el icono del input email
-let emailInput ;
-Promise.resolve(emailInput =document.querySelector(".email"))
-.then(()=>{
-    emailInput.addEventListener("keyup",async function(){
-        let modulo = await import("./events.js")
-        modulo.eventEmail()
+//  evento cancelar
+function cancelar(cancel){
+    
+    let bottonCancelar = document.querySelector(".botton-cancelar")
+    bottonCancelar.addEventListener("click",()=>{
+        cancel.classList.remove("open-container-añadir")
     })
-})
-.catch(error => console.log(error))
+}
 
 
-
-// Evento sobre el icono del input del password
-
-let iconPassword
-
-Promise.resolve( iconPassword = document.querySelector(".bi-eye"))
-.then(icon =>{
-    icon.addEventListener("click",async function(){
-        let modulo  = await import("./events.js")
-        modulo.eventPassword()
-    })
-})
-.catch(error => console.log(error))
-
-
-// evento añadir libro
-
-
-
-let añadirLibro;
+// evento click añadir
+let añadirLibro =  document.querySelector(".botton-añadir-libro")
 Promise.resolve( añadirLibro = document.querySelector(".botton-añadir-libro"))
-.then(()=>{
-    añadirLibro.addEventListener("click",()=>{
-        let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
-        containerAñadirlibro.classList.toggle("open-container-añadir")
 
+añadirLibro.addEventListener("click",()=>{
+    let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
+    containerAñadirlibro.classList.toggle("open-container-añadir")
 
-        let modulo="./events.js"
-        import(modulo)
-        .then(modulo =>{
-            modulo.cancelar(containerAñadirlibro)
-        })
-        .catch(error => console.log(error))
-      
-        
-    })
+    cancelar(containerAñadirlibro)
 })
-
 
 
 
@@ -74,4 +43,7 @@ form_añadir.onsubmit=(e)=>{
         autor_libro.value= ""
         editorial_libro.value = ""
         cantidad_libro.value = ""
+        
+        let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
+        containerAñadirlibro.classList.remove("open-container-añadir")
 }     
