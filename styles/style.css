@@ -61,6 +61,7 @@ body{
     transform: scale(1.02 ,1.02);
     background-color: rgba(68, 186, 186, 0.432);   
     border-radius: 8px;     
+    z-index: 1;
 }
 
 .list-options-dropdown li{
@@ -77,30 +78,82 @@ body{
 }
 
 
-.container-añadir-libro{
-    margin: none;
-    max-width: 300px;
-    min-width: 300px;
-     border-radius: 20px; 
-     background: rgb(244, 243, 243);
+.container-añadir-libro , .container-editar-libro{
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50% );
+    border: 1px solid #eee;
+    max-width: 90%;
+    border-radius: 20px; 
+    background:rgb(255, 255, 255);
     display: none;
+    z-index: 5;
 
 }
-.container-añadir-libro h4{
-    background-color:rgba(68, 186, 186, 0.432);
+.container-añadir-libro  h4{
+    background-color:rgba(58, 255, 255, 0.432);
     border-radius: 12px;
+}
+
+.container-editar-libro h4{
+    background-color:rgba(58, 255, 255, 0.432);
+    border-radius: 12px;
+}
+
+
+
+.open-container-editar{
+    display: block;
 }
 
 .open-container-añadir{
     display: block;
 }
 
-@media(min-width:768px){
-    .container-añadir-libro{
-        position: absolute;
-    
 
+.container-libros{
+    display: grid;
+    grid-template-columns:repeat(auto-fill,300px);
+    grid-auto-rows: minmax(300px  350px);
+    grid-gap: 10px;
+    /* grid-auto-rows: auto; */
+    justify-content: center;
+   
+}
+
+/* .container-card{
+    box-shadow: 0 0 3px rgba(0,0,0,0.6);
+} */
+
+.container-eliminar {
+    text-align: center;
+    width: 280PX;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50% , -50%);
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+}
+
+.container-eliminar,  h2{
+    background: rgba(255, 0, 0, 0.344);
+}
+
+.open-container-eliminar{
+    display: block;
+}
+
+@media(min-width:768px){
+    .container-añadir-libro , .container-editar-libro{
+        position: fixed;
+        top: 24%;
         left: 100%;
+        max-width: 300px;
+        min-width: 300px; 
         transform: translateX(-100%);
        border-radius: 20px 0 0 20px;
     }
