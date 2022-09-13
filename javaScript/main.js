@@ -57,8 +57,6 @@ class libro{
 }
 
 
-
-
 //  evento cancelar
 function cancelar(varible , clase){
     
@@ -114,14 +112,14 @@ form_añadir.onsubmit=(e)=>{
         let newLibro = new libro(valor_nombre , valor_autor_libro , valor_editorial , valor_categoria , valor_cantidad)
         lista_libros.push(newLibro)
         
-        console.log(newLibro)
+        
     
         
         // contenedor padre  
 
         // etiqueta contenedora de la informacion capturada 
         let container_card = document.createElement("article")
-        container_card.classList.add('card', 'border-dark')
+        container_card.classList.add('article-card')
         
         // etiqueta  subcontenedora
         let div_card = document.createElement("div")
@@ -182,7 +180,7 @@ form_añadir.onsubmit=(e)=>{
         // botones editar e iliminar :
 
         let botonEditar = document.createElement("button")
-        botonEditar.classList.add('btn', 'bg-info' ,'text-white' ,'bottom-editar')
+        botonEditar.classList.add('btn','text-white' ,'bottom-editar')
         botonEditar.textContent = "Editar"
 
 
@@ -233,7 +231,7 @@ form_añadir.onsubmit=(e)=>{
 
 
 
-        
+        // evento editar
 
         let eventEditar= document.querySelector(".bottom-editar")
         eventEditar.addEventListener("click", ()=>{
@@ -279,107 +277,36 @@ form_añadir.onsubmit=(e)=>{
 
         })
 
-        // eventEditar.forEach(editar =>{
-        //     editar.addEventListener("click", ()=>{
-        //         let contenedor_editar = document.getElementById("container-editar-libro")
-        //         contenedor_editar.classList.toggle("open-container-editar")
-
-        //         cancelar(contenedor_editar , "open-container-editar")
-
-
-                
-        //         let form_editar = document.getElementById("form-editar-libro")
-        //         form_editar.onsubmit=(e)=>{
-        //             e.preventDefault()
-        //             let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
-        //             let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
-        //             let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
-        //             let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
-        //             let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
-
-                    
-        //             // console.log(container_card.children[0].children)
-        //             container_card.children[0].children[0].textContent = nuevo_nombre.value
-        //             container_card.children[0].children[1].textContent = nuevo_autorlibro.value
-        //             container_card.children[0].children[2].children[1].textContent = nuevo_editorial_libro.value
-        //             container_card.children[0].children[3].children[1].textContent = nuevo_categoria_libro.value
-        //             container_card.children[0].children[4].children[1].textContent = nuevo_cantidad_libro.value
-
-        //             newLibro.nombre = nuevo_nombre.value
-        //             newLibro.autor = nuevo_autorlibro.value
-        //             newLibro.editorial = nuevo_editorial_libro.value
-        //             newLibro.categoria = nuevo_categoria_libro.value
-        //             newLibro.cantidad = nuevo_cantidad_libro.value
-                    
-        //             nuevo_nombre.value = ""
-        //             nuevo_autorlibro. value= ""
-        //             nuevo_editorial_libro.value = ""
-        //             nuevo_categoria_libro.value = ""
-        //             nuevo_cantidad_libro.value = ""
-
-
-        //             contenedor_editar.classList.remove("open-container-editar")
-        //         }
-
-        //     })
-        // })
-
-
-
-        // let eventEditar= document.querySelectorAll(".bottom-editar")
-        // eventEditar.forEach(editar =>{
-        //     editar.addEventListener("click", ()=>{
-        //         let contenedor_editar = document.getElementById("container-editar-libro")
-        //         contenedor_editar.classList.toggle("open-container-editar")
-
-        //         cancelar(contenedor_editar , "open-container-editar")
-
-
-                
-        //         let form_editar = document.getElementById("form-editar-libro")
-        //         form_editar.onsubmit=(e)=>{
-        //             e.preventDefault()
-        //             let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
-        //             let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
-        //             let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
-        //             let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
-        //             let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
-
-                    
-        //             // console.log(container_card.children[0].children)
-        //             container_card.children[0].children[0].textContent = nuevo_nombre.value
-        //             container_card.children[0].children[1].textContent = nuevo_autorlibro.value
-        //             container_card.children[0].children[2].children[1].textContent = nuevo_editorial_libro.value
-        //             container_card.children[0].children[3].children[1].textContent = nuevo_categoria_libro.value
-        //             container_card.children[0].children[4].children[1].textContent = nuevo_cantidad_libro.value
-
-        //             newLibro.nombre = nuevo_nombre.value
-        //             newLibro.autor = nuevo_autorlibro.value
-        //             newLibro.editorial = nuevo_editorial_libro.value
-        //             newLibro.categoria = nuevo_categoria_libro.value
-        //             newLibro.cantidad = nuevo_cantidad_libro.value
-                    
-        //             nuevo_nombre.value = ""
-        //             nuevo_autorlibro. value= ""
-        //             nuevo_editorial_libro.value = ""
-        //             nuevo_categoria_libro.value = ""
-        //             nuevo_cantidad_libro.value = ""
-
-
-        //             contenedor_editar.classList.remove("open-container-editar")
-        //         }
-
-        //     })
-        // })
-
-
 }
 
+// evento en el buscador 
+// console.log
+
+let buscador = document.getElementById("buscador")
+buscador.addEventListener("keyup" , (e) =>{
+    let texto =   e.target.value
+     
+
+    let er = new RegExp(texto,'i')
 
 
+    for (let index = 0; index < contenedor_libros.children.length; index++) {
+        let  valor = contenedor_libros.children[index]
 
+        if(er.test(valor.children[0].children[0].textContent)){
 
- 
+            valor.classList.remove("filter")
+
+        }else{
+
+            valor.classList.add("filter")
+
+        }
+    }
+
+    if(e.key ==="Escape")e.target.value =""
+
+})  
 
 
 
