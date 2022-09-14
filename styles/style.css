@@ -54,12 +54,16 @@ body{
 
 
 .nav-main{
-    background-color:rgba(68, 186, 186, 0.432);
+    background-color:rgb(68, 186, 186);
+    position:fixed;
+    width: 100%;
+    top: 0;
+    z-index: 5;
 }
 
 .list-options li:hover{
     transform: scale(1.02 ,1.02);
-    background-color: rgba(68, 186, 186, 0.432);   
+    background-color: rgba(255, 255, 255, 0.514);   
     border-radius: 8px;     
     z-index: 1;
 }
@@ -114,8 +118,11 @@ body{
 
 
 .container-libros{
+    position: relative;
+    top: 10%;
+
     display: grid;
-    padding-bottom: 10px;
+    padding: 10px 0;
     grid-template-columns:repeat(auto-fill,330px);
     grid-template-rows:auto;
     grid-gap: 15px;
@@ -147,4 +154,6 @@ body{
         transform: translateX(-100%);
        border-radius: 20px 0 0 20px;
     }
+
+   
 }
