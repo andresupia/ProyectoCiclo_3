@@ -12,6 +12,8 @@
     <title>Bienvenido</title>
 </head>
 <body>
+
+  <!-- Navegaador de opciones y buscador  -->
     <nav class="navbar navbar-expand-lg nav-main">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"></a>
@@ -25,17 +27,9 @@
                 
                 <li class="nav-item dropdown me-4 ">
                   
-                  <a class="nav-link dropdown-toggle active ps-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Perfil
+                  <a class="nav-link  active ps-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cerrar sesión
                   </a>
-
-                  <ul class="dropdown-menu list-options-dropdown"  id="">
-                    <li><a class="dropdown-item" href="#">definir</a></li>
-                    <li><a class="dropdown-item" href="#">definir</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Cerrar sección</a></li>
-                  </ul>
-
 
                 </li>
 
@@ -50,12 +44,13 @@
             </ul>
 
             <form class="d-flex" role="search">
-              <input class="form-control me-2 button-search" type="search" placeholder="Tus libros ..." aria-label="Search" id="buscador" autocomplete="off">
+              <input class="form-control me-2 button-search" type="search" placeholder="Nombre o Autor ..." aria-label="Search" id="buscador" autocomplete="off">
             </form>
           </section>
         </div>
       </nav>
 
+      <!-- contenedor del  formulario añadir libro  -->
       <section class=" container  p-4  container-añadir-libro">
         <h4 class="p-2   " >Añadir libro</h4>
         <form action="#" role="form"  id="form-añadir-libro">
@@ -92,14 +87,14 @@
       </section>
 
 
-      
+      <!-- Contenedor del formulario editar libro -->
       <section class=" container  p-4  container-editar-libro " id="container-editar-libro">
         <h4 class="p-2 " >Editar libro</h4>
         <form action="#" role="form"  id="form-editar-libro">
           
           <div class="form-floating mb-2 ">
             <input  class="form-control" type="text" id="nuevo-nombre-libro" name="nuevo-nombre-libro" required autocomplete="off" placeholder="Nombre">
-            <label for="nuevo-nombre-libro" class="">Nombre </label>
+            <label for="nuevo-nombre-libro" id="label-nombre">Nombre </label>
           </div>
       
           <div class="form-floating mb-2">
@@ -128,9 +123,7 @@
         </form>
       </section>
 
-
-    
-
+      <!-- contenedor principal donde se agregan los libros del usuario  -->
        <main class="container-libros contianer-fluid mt-2" id="container-libros">
       </main> 
       
