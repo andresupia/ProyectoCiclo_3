@@ -73,11 +73,12 @@ body{
     background-color: rgba(68, 186, 186, 0.432);
 }
 
+
+/* estilos para los contenedores editar y añadir libro */
 .botton-añadir-libro{
     cursor: pointer;
 }
 
-/* estilos para los contenedores editar y añadir libro */
 .container-añadir-libro , .container-editar-libro{
     position: absolute;
     left: 50%; 
@@ -113,14 +114,15 @@ body{
 
 
 .container-libros{
+    padding: 0 15px;
     display: grid;
-    grid-template-columns:repeat(auto-fill,300px);
+    grid-template-columns:repeat(auto-fill,330px);
     grid-template-rows:auto;
     grid-gap: 15px;
    grid-auto-flow: row;
-   justify-content: center;
 }
 
+/* estilos para la targeta con la informacion del libro */
 .container-libros article div{
    border:1px solid #eee;
    padding: 20px;
@@ -128,41 +130,10 @@ body{
    box-shadow: 0 0 5px rgba(0,0,0,0.4);
 }
 
+/* clase para hacer el filtrado de los libros */
 .filter{
     display: none;
 }
-
-.bottom-editar{
-    background:blue;
-}
-
-.bottom-editar:hover{
-    background: rgba(0,0,255,0.8);
-}
-
-
-.container-eliminar {
-    text-align: center;
-    width: 280PX;
-    height: 200px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50% , -50%);
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 10px;
-    display: none;
-}
-
-.container-eliminar,  h2{
-    background: rgba(255, 0, 0, 0.344);
-}
-
-.open-container-eliminar{
-    display: block;
-}
-
 
 @media(min-width:768px){
     .container-añadir-libro , .container-editar-libro{
