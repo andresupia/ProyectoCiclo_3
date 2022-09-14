@@ -77,10 +77,12 @@ let añadirLibro =  document.querySelector(".botton-añadir-libro")
 Promise.resolve( añadirLibro = document.querySelector(".botton-añadir-libro"))
 
 añadirLibro.addEventListener("click",()=>{
+
     let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
     containerAñadirlibro.classList.toggle("open-container-añadir")
 
     cancelar(containerAñadirlibro,"open-container-añadir")
+
 })
 
 
@@ -88,8 +90,11 @@ añadirLibro.addEventListener("click",()=>{
 // atrapando la informacion ingresada por el usuario en la opcion añadir libro
 
 let form_añadir = document.getElementById("form-añadir-libro")
+
+// array con los objetos libros
 const lista_libros = []
 
+// contenedor padre
 let contenedor_libros  = document.getElementById("container-libros")
 
 form_añadir.onsubmit=(e)=>{
@@ -115,90 +120,25 @@ form_añadir.onsubmit=(e)=>{
         
     
         
-        // contenedor padre  
+         
 
         // etiqueta contenedora de la informacion capturada 
         let container_card = document.createElement("article")
         container_card.classList.add('article-card')
         
-        // etiqueta  subcontenedora
-        let div_card = document.createElement("div")
-        div_card.classList.add("card-body")
+        container_card.innerHTML=`<div class="card-body">
 
-        // Etiqueta h4 para el nombre del libro
-        let h4_title = document.createElement("h4")
-        h4_title.classList.add('card-title' , 'mb-3')
-        h4_title.textContent = newLibro.nombre
-        
-        // etiqueta h5 para el nomnre del autor
-        let h5_subtitle = document.createElement("h5")
-        h5_subtitle.classList.add('card-subtitle' , 'text-muted', 'border-bottom' , 'mb-3' ,'pb-2')
-        h5_subtitle.textContent = newLibro.autor
-        
-        // etiquetas span y p para almacenar y mostrar  la editorial
-        let spanEditorial  = document.createElement("span")
-        spanEditorial.classList.add("text-dark")
-        spanEditorial.textContent = newLibro.editorial
+                                <h4 class="card-title mb-3">${newLibro.nombre}</h4>
+                                <h5 class="card-subtitle text-muted border-bottom mb-3 pb-2 ">${newLibro
+                                .autor}</h5>
+                                <p class="card-text"> <span class="text-muted">Editorial : </span> <span class="text-dark">${newLibro.editorial}</span> </p>
+                                <p class="card-text"> <span class="text-muted">Categoria : </span> <span class="text-dark">${newLibro.categoria}</span> </p>
+                                <p class="card-text"> <span class="text-muted">Cantidad : </span> <span class="text-dark">${newLibro.cantidad}</span> </p>
 
-        let spanEditorialInfo  = document.createElement("span")
-        spanEditorialInfo.textContent = "Editorial : "
-        
-        let p_editorial = document.createElement("P")
-        p_editorial.classList.add('card-text', 'text-muted')
-        p_editorial.appendChild(spanEditorialInfo)
-        p_editorial.appendChild(spanEditorial)
-
-        // etiquetas span y p para almacenar y mostrar  la categoria
-
-        let spanCategoria = document.createElement("span")
-        spanCategoria.classList.add("text-dark")
-        spanCategoria.textContent = newLibro.categoria
-
-        let spanCategoriaInfo  = document.createElement("span")
-        spanCategoriaInfo.textContent= "Categoria : "
-
-        
-        let pCategoria = document.createElement("p")
-        pCategoria.classList.add('card-text', 'text-muted')
-        pCategoria.appendChild(spanCategoriaInfo)
-        pCategoria.appendChild(spanCategoria)
-
-        // etiquetas span y p para almacenar y mostrar  la cantidad
-
-        let spanCantidad = document.createElement("span")
-        spanCantidad.classList.add("text-dark")
-        spanCantidad.textContent = newLibro.cantidad
-
-        let  spanCantidadInfo = document.createElement("span")
-        spanCantidadInfo.textContent = "Cantidad : "
-        
-        let pCantidad = document.createElement("p")
-        pCantidad.classList.add('card-text', 'text-muted')
-        pCantidad.appendChild(spanCantidadInfo)
-        pCantidad.appendChild(spanCantidad)
-        
-        // botones editar e iliminar :
-
-        let botonEditar = document.createElement("button")
-        botonEditar.classList.add('btn','text-white' ,'bottom-editar')
-        botonEditar.textContent = "Editar"
-
-
-        let botonEliminar = document.createElement("button")
-        botonEliminar.classList.add('btn' , 'float-end' , 'bg-danger' , 'text-white' , 'bottom-eliminar')
-        botonEliminar.textContent = "Eliminar"
-      
-        // añadiendo las etiquetas creadas a la card
-        div_card.appendChild(h4_title)
-        div_card.appendChild(h5_subtitle)
-        div_card.appendChild(p_editorial)
-        div_card.appendChild(pCategoria)
-        div_card.appendChild(pCantidad)
-        div_card.appendChild(botonEditar)
-        div_card.appendChild(botonEliminar)
-
-        // añadiendo la card a la etiqueta padre contenedora 
-        container_card.appendChild(div_card)
+                                <button class="btn text-white bottom-editar bg-primary ">Editar</button>
+                                <button class="btn text-white float-end bg-danger bottom-eliminar">Eliminar</button>
+                               
+                                </div>`
 
         contenedor_libros.prepend(container_card)
    
@@ -217,7 +157,9 @@ form_añadir.onsubmit=(e)=>{
         eventEliminar.addEventListener("click",()=> {
 
             try {
+
                 let confirmacion= prompt('¿ estas seguro de eliminar este libro ? \n si \n no').toLowerCase()
+                
                 if(confirmacion == "si"){
                     eventEliminar.parentElement.parentElement.remove()
                 }
@@ -230,7 +172,6 @@ form_añadir.onsubmit=(e)=>{
         })
 
 
-
         // evento editar
 
         let eventEditar= document.querySelector(".bottom-editar")
@@ -240,18 +181,17 @@ form_añadir.onsubmit=(e)=>{
     
             cancelar(contenedor_editar , "open-container-editar")
     
+            let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
+            let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
+            let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
+            let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
+            let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
     
+
             let form_editar = document.getElementById("form-editar-libro")
             form_editar.onsubmit=(e)=>{
                 e.preventDefault()
-                    let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
-                    let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
-                    let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
-                    let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
-                    let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
-    
-                        
-                        // console.log(container_card.children[0].children)
+
                     container_card.children[0].children[0].textContent = nuevo_nombre.value
                     container_card.children[0].children[1].textContent = nuevo_autorlibro.value
                     container_card.children[0].children[2].children[1].textContent = nuevo_editorial_libro.value
@@ -280,8 +220,6 @@ form_añadir.onsubmit=(e)=>{
 }
 
 // evento en el buscador 
-// console.log
-
 let buscador = document.getElementById("buscador")
 buscador.addEventListener("keyup" , (e) =>{
     let texto =   e.target.value
@@ -293,7 +231,7 @@ buscador.addEventListener("keyup" , (e) =>{
     for (let index = 0; index < contenedor_libros.children.length; index++) {
         let  valor = contenedor_libros.children[index]
 
-        if(er.test(valor.children[0].children[0].textContent)){
+        if(er.test(valor.children[0].children[0].textContent) || er.test(valor.children[0].children[1].textContent) ){
 
             valor.classList.remove("filter")
 
@@ -307,6 +245,3 @@ buscador.addEventListener("keyup" , (e) =>{
     if(e.key ==="Escape")e.target.value =""
 
 })  
-
-
-
