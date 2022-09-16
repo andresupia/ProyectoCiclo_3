@@ -234,9 +234,6 @@ buscador.addEventListener("keyup" , (e) =>{
     for (let index = 0; index < contenedor_libros.children.length; index++) {
         let  valor = contenedor_libros.children[index]
 
-        // console.log(valor.children[0].textContent)
-        // console.log(valor.children[1].children[0].children[1].textContent)
-
         if(er.test(valor.children[0].textContent) || er.test(valor.children[1].children[0].children[1].textContent) ){
 
             valor.classList.remove("filter")

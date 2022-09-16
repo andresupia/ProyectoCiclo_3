@@ -106,8 +106,6 @@ body{
     border-radius: 12px;
 }
 
-
-
 .open-container-editar{
     display: block;
 }
@@ -119,25 +117,35 @@ body{
 
 .container-libros{
     position: relative;
-    top: 10%;
-
+    top: 8%;
     display: grid;
     padding: 10px 0;
-    grid-template-columns:repeat(auto-fill,330px);
+    grid-template-columns:repeat(auto-fill,280px);
     grid-template-rows:auto;
-    grid-gap: 15px;
-    justify-content: center;
-   grid-auto-flow: row;
+    justify-content:space-around;
+    grid-auto-flow: row;
 }
 
 /* estilos para la targeta con la informacion del libro */
-.container-libros article div{
+
+details{
+    width: 100%;
+    padding: 10px;
     overflow-wrap: break-word;
-   border:1px solid #eee;
-   padding: 20px;
-   border-radius: 20px;
-   box-shadow: 0 0 5px rgba(0,0,0,0.4);
 }
+summary{
+    width: 100%;
+    background-color: #eee;
+    padding: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+details div{
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
 
 /* clase para hacer el filtrado de los libros */
 .filter{
@@ -153,7 +161,5 @@ body{
         min-width: 300px; 
         transform: translateX(-100%);
        border-radius: 20px 0 0 20px;
-    }
-
-   
+    }  
 }
