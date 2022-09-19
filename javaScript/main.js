@@ -1,3 +1,4 @@
+// funcion constructura de libros
 function libros(nombre, autor , editorial, categoria , cantidad){
     this.nombre = nombre
     this.autor = autor
@@ -36,32 +37,33 @@ añadirLibro.addEventListener("click",()=>{
 
 
 
+// funcion para obtener los libros dentro del localStorage
+function obtenerLocalStorage(){
+    localStorage.setItem('libro',JSON.stringify(lista_libros))
+}
 
 
-
-// funcion para remover libros dentro del array y el DOM
+// funcion para remover libros dentro del array, el DOM y del localStorage
 function eliminar(){
 let eventoEliminar = document.querySelectorAll(".boton-eliminar")
 eventoEliminar.forEach((elemento)=>{
     elemento.addEventListener("click",()=>{
-
       
         elemento.parentElement.parentElement.remove()
         
         encontrado =  lista_libros.find(e=> e.nombre ==  elemento.parentElement.parentElement.children[0].textContent)
         let indice = lista_libros.findIndex(element=> element==encontrado)
         lista_libros.splice(indice,1)
-        localStorage.setItem('libro',JSON.stringify(lista_libros))
 
+        obtenerLocalStorage() 
 
-        
         })
     })
 
 }
 
 
-// funcion para editar un libro en el Dom y dentro de array
+// funcion para editar un libro en el Dom ,dentro de array y en el localStorage
 function editar(){
     let encontrado;
     let eventEditar= document.querySelectorAll(".bottom-editar")
@@ -108,8 +110,7 @@ function editar(){
                     nuevo_categoria_libro.value = ""
                     nuevo_cantidad_libro.value = ""
     
-                    localStorage.setItem('libro',JSON.stringify(lista_libros))
-
+                    obtenerLocalStorage()
     
                     contenedor_editar.classList.remove("open-container-editar")
 
@@ -118,38 +119,42 @@ function editar(){
     })
 }
 
-
+function htmlLibro(elemento){
+    contenedor_libros.innerHTML+= `<details class="card-libro">
+            <summary>${elemento?.nombre}</summary>
+            <div>
+            <p> <span class="text-muted">autor : </span> <span>${elemento?.autor}</span> </p>
+            <p><span class="text-muted">Editorial :</span> <span>${elemento?.editorial}</span></p>
+            <p><span class="text-muted">Categoria :</span> <span>${elemento?.categoria}</span> </p>
+            <p><span class="text-muted">Cantidad :</span>  <span> ${elemento?.cantidad}</span></p>
+            <button class="btn bg-info text-white bottom-editar">Editar</button>
+            <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
+            </div>
+        </details>`
+}
 
 
 // atrapando y mostrando la informacion ingresada por el usuario en la opcion añadir libro
 let contenedor_libros  = document.getElementById("container-libros")
 
 // array con los objetos libros
-const lista_libros = JSON.parse(localStorage.getItem('libro'))||[]
+const lista_libros = JSON.parse(localStorage.getItem('libro')) || []
 
-
+// funcion  para mostrar aquellos libros que esten en el localStorage
 function mostar(){
     for (const i of lista_libros) {
-        
-        contenedor_libros.innerHTML+=` <details class="card-libro">
-            <summary>${i.nombre}</summary>
-            <div>
-            <p> <span class="text-muted">autor : </span> <span>${i.autor}</span> </p>
-            <p><span class="text-muted">Editorial :</span> <span>${i.editorial}</span></p>
-            <p><span class="text-muted">Categoria :</span> <span>${i.categoria}</span> </p>
-            <p><span class="text-muted">Cantidad :</span>  <span> ${i.cantidad}</span></p>
-            <button class="btn bg-info text-white bottom-editar">Editar</button>
-            <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
-            </div>
-        </details>`
+
+        htmlLibro(i)
 
         eliminar()
+
         editar()
     }
 }
 
 mostar()
 
+// previniendo el evento enviar en el formulario añadir 
 let form_añadir = document.getElementById("form-añadir-libro")
 
 form_añadir.onsubmit=(e)=>{
@@ -174,20 +179,6 @@ form_añadir.onsubmit=(e)=>{
 
         let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
         containerAñadirlibro.classList.remove("open-container-añadir")
-    
-        contenedor_libros.innerHTML+=` <details class="card-libro">
-        <summary>${newLibro.nombre}</summary>
-        <div>
-        <p> <span class="text-muted">autor : </span> <span>${newLibro.autor}</span> </p>
-        <p><span class="text-muted">Editorial :</span> <span>${newLibro.editorial}</span></p>
-        <p><span class="text-muted">Categoria :</span> <span>${newLibro.categoria}</span> </p>
-        <p><span class="text-muted">Cantidad :</span>  <span> ${newLibro.cantidad}</span></p>
-        <button class="btn bg-info text-white bottom-editar">Editar</button>
-        <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
-        </div>
-    </details>`
-
-    localStorage.setItem('libro',JSON.stringify(lista_libros))
 
         nombre_libro.value = ""
         autor_libro.value= ""
@@ -195,11 +186,11 @@ form_añadir.onsubmit=(e)=>{
         cantidad_libro.value = ""
         categoria_libro.value=""
 
-    
+        htmlLibro(newLibro)
+        obtenerLocalStorage()
         eliminar()
         editar()
 }   
-
 
 
 // evento en el buscador 
