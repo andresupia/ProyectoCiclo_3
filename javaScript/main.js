@@ -77,42 +77,46 @@ function editar(){
             cancelar(contenedor_editar , "open-container-editar")
                     
             encontrado =  lista_libros.find(element=> element.nombre ==  e.parentElement.parentElement.children[0].textContent)
-            console.log(lista_libros.includes(encontrado))
             let indice = lista_libros.findIndex(element=> element==encontrado)
-               
+            
+            let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
+            let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
+            let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
+            let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
+            let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
+
+            nuevo_nombre.value = lista_libros[indice].nombre
+            nuevo_autorlibro.value = lista_libros[indice].autor
+            nuevo_editorial_libro.value = lista_libros[indice].editorial
+            nuevo_categoria_libro.value = lista_libros[indice].categoria
+            nuevo_cantidad_libro.value = lista_libros[indice].cantidad
+
             let form_editar = document.getElementById("form-editar-libro")
             form_editar.onsubmit=(evento)=>{
                 evento.preventDefault()
+                
+                e.parentElement.parentElement.children[0].textContent  = nuevo_nombre.value
 
-                let nuevo_nombre = document.getElementById("nuevo-nombre-libro")
-                let nuevo_autorlibro = document.getElementById("nuevo-autor-libro")
-                let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
-                let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
-                let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
-        
-                  
-                    e.parentElement.parentElement.children[0].textContent  = nuevo_nombre.value
+                e.parentElement.children[0].children[1].textContent  = nuevo_autorlibro.value
+                e.parentElement.children[1].children[1].textContent  = nuevo_editorial_libro.value
+                e.parentElement.children[2].children[1].textContent  = nuevo_categoria_libro.value
+                e.parentElement.children[3].children[1].textContent  = nuevo_cantidad_libro.value
 
-                    e.parentElement.children[0].children[1].textContent  = nuevo_autorlibro.value
-                    e.parentElement.children[1].children[1].textContent  = nuevo_editorial_libro.value
-                    e.parentElement.children[2].children[1].textContent  = nuevo_categoria_libro.value
-                    e.parentElement.children[3].children[1].textContent  = nuevo_cantidad_libro.value
+                lista_libros[indice].nombre = nuevo_nombre.value
+                lista_libros[indice].autor = nuevo_autorlibro.value
+                lista_libros[indice].editorial = nuevo_editorial_libro.value
+                lista_libros[indice].categoria = nuevo_categoria_libro.value
+                lista_libros[indice].cantidad = nuevo_cantidad_libro.value
 
-                    lista_libros[indice].nombre = nuevo_nombre.value
-                    lista_libros[indice].autor = nuevo_autorlibro.value
-                    lista_libros[indice].editorial = nuevo_editorial_libro.value
-                    lista_libros[indice].categoria = nuevo_categoria_libro.value
-                    lista_libros[indice].cantidad = nuevo_cantidad_libro.value
-
-                    nuevo_nombre.value = ""
-                    nuevo_autorlibro. value= ""
-                    nuevo_editorial_libro.value = ""
-                    nuevo_categoria_libro.value = ""
-                    nuevo_cantidad_libro.value = ""
+                nuevo_nombre.value = ""
+                nuevo_autorlibro. value= ""
+                nuevo_editorial_libro.value = ""
+                nuevo_categoria_libro.value = ""
+                nuevo_cantidad_libro.value = ""
     
-                    obtenerLocalStorage()
+                obtenerLocalStorage()
     
-                    contenedor_editar.classList.remove("open-container-editar")
+                contenedor_editar.classList.remove("open-container-editar")
 
             }           
         })
