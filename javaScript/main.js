@@ -1,61 +1,10 @@
-// clase libro
-class libro{
-    #nombre;
-    #autor
-    #editorial
-    #cantidad
-    #categoria
-    constructor(nombre , autor, editorial , categoria,cantidad){
-        this.#nombre = nombre
-        this.#autor = autor
-        this.#editorial = editorial
-        this.#cantidad = cantidad
-        this.#categoria = categoria
-    }
-
-    get nombre(){
-        return this.#nombre
-    }
-
-    set nombre(newNombre){
-        this.#nombre = newNombre
-    }
-
-    get autor(){
-        return this.#autor
-    }
-
-    set autor(newAutor){
-        this.#autor = newAutor
-    }
-
-    get editorial(){
-        return this.#editorial
-    }
-
-    set editorial(newEditorial){
-        this.#editorial = newEditorial
-    }
-
-
-    get categoria(){
-        return this.#categoria
-    }
-
-    set categoria(newCategoria){
-        this.#categoria = newCategoria
-    }
-
-
-    get cantidad(){
-        return this.#cantidad
-    }
-
-    set cantidad(newCantidad){
-        this.#cantidad = newCantidad
-    }
+function libros(nombre, autor , editorial, categoria , cantidad){
+    this.nombre = nombre
+    this.autor = autor
+    this.editorial = editorial
+    this.categoria = categoria
+    this.cantidad = cantidad
 }
-
 
 //  evento cancelar
 function cancelar(varible , clase){
@@ -88,8 +37,7 @@ añadirLibro.addEventListener("click",()=>{
 
 
 
-// array con los objetos libros
-const lista_libros = []
+
 
 // funcion para remover libros dentro del array y el DOM
 function eliminar(){
@@ -103,6 +51,9 @@ eventoEliminar.forEach((elemento)=>{
         encontrado =  lista_libros.find(e=> e.nombre ==  elemento.parentElement.parentElement.children[0].textContent)
         let indice = lista_libros.findIndex(element=> element==encontrado)
         lista_libros.splice(indice,1)
+        localStorage.setItem('libro',JSON.stringify(lista_libros))
+
+
         
         })
     })
@@ -157,6 +108,8 @@ function editar(){
                     nuevo_categoria_libro.value = ""
                     nuevo_cantidad_libro.value = ""
     
+                    localStorage.setItem('libro',JSON.stringify(lista_libros))
+
     
                     contenedor_editar.classList.remove("open-container-editar")
 
@@ -170,6 +123,32 @@ function editar(){
 
 // atrapando y mostrando la informacion ingresada por el usuario en la opcion añadir libro
 let contenedor_libros  = document.getElementById("container-libros")
+
+// array con los objetos libros
+const lista_libros = JSON.parse(localStorage.getItem('libro'))||[]
+
+
+function mostar(){
+    for (const i of lista_libros) {
+        
+        contenedor_libros.innerHTML+=` <details class="card-libro">
+            <summary>${i.nombre}</summary>
+            <div>
+            <p> <span class="text-muted">autor : </span> <span>${i.autor}</span> </p>
+            <p><span class="text-muted">Editorial :</span> <span>${i.editorial}</span></p>
+            <p><span class="text-muted">Categoria :</span> <span>${i.categoria}</span> </p>
+            <p><span class="text-muted">Cantidad :</span>  <span> ${i.cantidad}</span></p>
+            <button class="btn bg-info text-white bottom-editar">Editar</button>
+            <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
+            </div>
+        </details>`
+
+        eliminar()
+        editar()
+    }
+}
+
+mostar()
 
 let form_añadir = document.getElementById("form-añadir-libro")
 
@@ -189,7 +168,7 @@ form_añadir.onsubmit=(e)=>{
         let valor_cantidad = cantidad_libro.value
         let valor_categoria = categoria_libro.value
   
-        let newLibro = new libro(valor_nombre , valor_autor_libro , valor_editorial , valor_categoria , valor_cantidad)
+        let newLibro = new libros(valor_nombre , valor_autor_libro , valor_editorial , valor_categoria , valor_cantidad)
         lista_libros.push(newLibro)
 
 
@@ -208,7 +187,8 @@ form_añadir.onsubmit=(e)=>{
         </div>
     </details>`
 
-        
+    localStorage.setItem('libro',JSON.stringify(lista_libros))
+
         nombre_libro.value = ""
         autor_libro.value= ""
         editorial_libro.value = ""
