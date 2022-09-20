@@ -1,10 +1,11 @@
 // funcion constructura de libros
-function libros(nombre, autor , editorial, categoria , cantidad){
+function libros(nombre, autor , editorial, categoria , cantidad, ediccion){
     this.nombre = nombre
     this.autor = autor
     this.editorial = editorial
     this.categoria = categoria
     this.cantidad = cantidad
+    this.ediccion = ediccion
 }
 
 //  evento cancelar
@@ -84,12 +85,14 @@ function editar(){
             let nuevo_editorial_libro = document.getElementById("nuevo-editorial-libro")
             let nuevo_cantidad_libro = document.getElementById("nuevo-cantidad-libro")
             let nuevo_categoria_libro = document.getElementById("nuevo-categoria-libro")
+            let nuevo_ediccion_libro = document.getElementById("nuevo-ediccion-libro")
 
             nuevo_nombre.value = lista_libros[indice].nombre
             nuevo_autorlibro.value = lista_libros[indice].autor
             nuevo_editorial_libro.value = lista_libros[indice].editorial
             nuevo_categoria_libro.value = lista_libros[indice].categoria
             nuevo_cantidad_libro.value = lista_libros[indice].cantidad
+            nuevo_ediccion_libro.value = lista_libros[indice].ediccion
 
             let form_editar = document.getElementById("form-editar-libro")
             form_editar.onsubmit=(evento)=>{
@@ -101,18 +104,23 @@ function editar(){
                 e.parentElement.children[1].children[1].textContent  = nuevo_editorial_libro.value
                 e.parentElement.children[2].children[1].textContent  = nuevo_categoria_libro.value
                 e.parentElement.children[3].children[1].textContent  = nuevo_cantidad_libro.value
+                e.parentElement.children[4].children[1].textContent  = nuevo_ediccion_libro.value
+                
 
                 lista_libros[indice].nombre = nuevo_nombre.value
                 lista_libros[indice].autor = nuevo_autorlibro.value
                 lista_libros[indice].editorial = nuevo_editorial_libro.value
                 lista_libros[indice].categoria = nuevo_categoria_libro.value
                 lista_libros[indice].cantidad = nuevo_cantidad_libro.value
+                lista_libros[indice].ediccion = nuevo_ediccion_libro.value
+                
 
                 nuevo_nombre.value = ""
                 nuevo_autorlibro. value= ""
                 nuevo_editorial_libro.value = ""
                 nuevo_categoria_libro.value = ""
                 nuevo_cantidad_libro.value = ""
+                nuevo_ediccion_libro.value = ""
     
                 obtenerLocalStorage()
     
@@ -131,6 +139,7 @@ function htmlLibro(elemento){
             <p><span class="text-muted">Editorial :</span> <span>${elemento?.editorial}</span></p>
             <p><span class="text-muted">Categoria :</span> <span>${elemento?.categoria}</span> </p>
             <p><span class="text-muted">Cantidad :</span>  <span> ${elemento?.cantidad}</span></p>
+            <p><span class="text-muted">Edicción :</span>  <span> ${elemento?.ediccion}</span></p>
             <button class="btn bg-info text-white bottom-editar">Editar</button>
             <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
             </div>
@@ -169,6 +178,8 @@ form_añadir.onsubmit=(e)=>{
         let editorial_libro = document.getElementById("editorial-libro")
         let cantidad_libro = document.getElementById("cantidad-libro")
         let categoria_libro = document.getElementById("categoria-libro")
+        let ediccion_libro = document.getElementById("ediccion-libro")
+
 
 
         let valor_nombre = nombre_libro.value
@@ -176,8 +187,9 @@ form_añadir.onsubmit=(e)=>{
         let valor_editorial = editorial_libro.value
         let valor_cantidad = cantidad_libro.value
         let valor_categoria = categoria_libro.value
-  
-        let newLibro = new libros(valor_nombre , valor_autor_libro , valor_editorial , valor_categoria , valor_cantidad)
+        let valor_ediccion = ediccion_libro.value
+
+        let newLibro = new libros(valor_nombre , valor_autor_libro , valor_editorial , valor_categoria , valor_cantidad, valor_ediccion)
         lista_libros.push(newLibro)
 
 
@@ -189,6 +201,7 @@ form_añadir.onsubmit=(e)=>{
         editorial_libro.value = ""
         cantidad_libro.value = ""
         categoria_libro.value=""
+        ediccion_libro.value = ""
 
         htmlLibro(newLibro)
         obtenerLocalStorage()

@@ -72,14 +72,20 @@
           </div>
 
           <div class="form-floating mb-2">
-            <input  class="form-control" type="text" id="categoria-libro" name="categoria-libro" required autocomplete="off"  placeholder="Categoria" min="1" max="10000">
-            <label for="categoria-libro" class="">Categoria </label>
+            <input  class="form-control" type="text" id="categoria-libro" name="categoria-libro" required autocomplete="off"  placeholder="Categoria" min="1">
+            <label for="categoria-libro" class="">Categoria</label>
           </div>
           
           
+          <div class="form-floating mb-2">
+            <input  class="form-control" type="number" id="cantidad-libro" name="cantidad-libro" required autocomplete="off"  placeholder="Cantidad" min="1">
+            <label for="cantidad-libro" class="">Cantidad</label>
+          </div>
+
+          
           <div class="form-floating">
-            <input  class="form-control" type="number" id="cantidad-libro" name="cantidad-libro" required autocomplete="off"  placeholder="Cantidad" min="1" max="10000">
-            <label for="cantidad-libro" class="">Cantidad </label>
+            <input  class="form-control" type="number" id="ediccion-libro" name="ediccion-libro" required autocomplete="off"  placeholder="Edicción" min="1">
+            <label for="ediccion-libro" class="">Edicción</label>
           </div>
           
           <button type="submit" class="btn btn-success mt-4 boton-añadir" id="boton-añadir" >Añadir</button>
@@ -109,14 +115,20 @@
           </div>
 
           <div class="form-floating mb-2">
-            <input  class="form-control" type="text" id="nuevo-categoria-libro" name="nuevo-categoria-libro" required autocomplete="off"  placeholder="Categoria" min="1" max="10000">
+            <input  class="form-control" type="text" id="nuevo-categoria-libro" name="nuevo-categoria-libro" required autocomplete="off"  placeholder="Categoria">
             <label for="nuevo-categoria-libro" class="">Categoria </label>
           </div>
           
           
-          <div class="form-floating">
-            <input  class="form-control" type="number" id="nuevo-cantidad-libro" name="nuevo-cantidad-libro" required autocomplete="off"  placeholder="Cantidad" min="1" max="10000">
+          <div class="form-floating mb-2">
+            <input  class="form-control" type="number" id="nuevo-cantidad-libro" name="nuevo-cantidad-libro" required autocomplete="off"  placeholder="Cantidad" min="1">
             <label for="nuevo-cantidad-libro" class="">Cantidad </label>
+          </div>
+
+          
+          <div class="form-floating">
+            <input  class="form-control" type="number" id="nuevo-ediccion-libro" name="nuevo-ediccion-libro" required autocomplete="off"  placeholder="Ediccion" min="1">
+            <label for="nuevo-ediccion-libro" class="">Edicción </label>
           </div>
           
           <button type="submit" class="btn btn-success mt-4 boton-añadir" >Guardar</button>
