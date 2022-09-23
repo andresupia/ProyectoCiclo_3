@@ -37,14 +37,18 @@ body{
 /* estilos para la vista registro */
 
 .singUp-form{
-    max-width: 500px;
+    max-width: 500px; 
     top: 50%;
     transform: translateY(-50%);
 }
 
+.singUp-form div{
+    z-index: 1;
+}
 
 .singUp-form input{
     font-size:14px ;
+   
 }
 
 .singUp-form i {
@@ -150,6 +154,43 @@ details div{
 /* clase para hacer el filtrado de los libros */
 .filter{
     display: none;
+}
+
+.container-alert {
+    z-index: 2;
+}
+
+.container-alert div{
+    display: flex;
+    align-content: center;
+    border: 1px solid #eee;
+    max-width: 50%;
+    padding: 10px;
+    margin-left:10px;
+    border-radius: 8px;
+}
+
+.container-alert div p{
+    display: inline-block;
+}
+.container-alert div button{
+    margin: 8px;
+    padding: 8px;
+    
+}
+
+.alert-denied{
+    background: red;
+}
+.alert-accepted{
+    background: green;
+}
+
+.close{
+    display: none;
+}
+.open{
+    display: block;
 }
 
 @media(min-width:768px){
