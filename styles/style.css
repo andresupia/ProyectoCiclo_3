@@ -158,13 +158,19 @@ details div{
 
 .container-alert {
     z-index: 2;
+    display: none;
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
 .container-alert div{
     display: flex;
     align-content: center;
     border: 1px solid #eee;
-    max-width: 50%;
+    max-width: 70%;
+    max-height: 150px;
+    overflow: auto;
     padding: 10px;
     margin-left:10px;
     border-radius: 8px;
@@ -180,15 +186,18 @@ details div{
 }
 
 .alert-denied{
-    background: red;
+    background: rgb(241, 109, 109);
+    color: rgba(255, 255, 255, 0.664);
 }
 .alert-accepted{
-    background: green;
+    background: rgb(87, 192, 87);
+    color: rgba(255, 255, 255, 0.664);
+
 }
 
-.close{
+/* .close{
     display: none;
-}
+} */
 .open{
     display: block;
 }

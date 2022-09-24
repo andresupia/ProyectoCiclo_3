@@ -22,7 +22,6 @@ emailInput.addEventListener('keyup',()=>{
 
 
 // Registro : 
-
 //  evento en el  icono del input password  
 
 let iconPassword= document.querySelector(".bi-eye")
@@ -42,77 +41,84 @@ iconPassword.addEventListener("click", ()=>{
 })
 
 
+// alertas al usuario
+
 function alertas(claseDiv , textoP){
-    let alert = document.getElementById('container-alert')
-    // alert.classList.remove('close')
-    let div = document.createElement('div')
-    div.classList.add(claseDiv)
+    let sectionAlert = document.getElementById('container-alert')
+    sectionAlert.classList.add('open')
 
-    let p = document.createElement('p')
-    let pContenido = document.createTextNode(textoP)
-    p.appendChild(pContenido)
+    let div_informacion = document.getElementById('div-container-information')    
+    div_informacion.classList.add(claseDiv)
 
-    let button  = document.createElement('button')
-    button.classList.add('btn-close', )
-
-    div.appendChild(p)
-    div.appendChild(button)
-
-    alert.appendChild(div)
+    let p_informacion = document.getElementById('pInformacion-alert')
+    p_informacion.innerHTML = textoP
     
-
-    // button.addEventListener('click',()=>{
-    //     alert.classList.add('close')
-    // })
+    let button_close = document.getElementById('btn_close-alert')
+    button_close.addEventListener('click',()=>{
+       sectionAlert.classList.remove('open')
+       div_informacion.classList.remove(claseDiv)
+    })
 }
+
 
 
 // peticion de creacion de usuario  a la api 
 
 const API = 'http://localhost:8080/usuario'
 
-
-
 async function obtenerUsuario(){
     let users = await fetch(API)
     let data  = await users.json()
-    console.log(data)
+    return data
 }
 
-
-async function eliminarUsuario(){
-
-}
 
 async function crearUnUsuario(alias , nombres , apellidos, cedula , direccion, telefono , correo, contraseña){
-   let crearUsuario = await fetch(API,{
-        method:'POST',
-        mode:'cors',
-        credentials:'same-origin',
-        headers:{
-            'Content-Type' : 'application/json; charset=utf-8'
-        },
-        body:JSON.stringify({
-            'idcedula_usr':cedula,
-            'alias_usr':alias,
-            'contrasena_usr': contraseña,
-            'correo_usr': correo,
-            'nombres_usr': nombres,
-            'apellidos_usr': apellidos,
-            'direccion_usr': direccion,
-            'telefono_usr': telefono,
-            'tipoUsr' : '1'
-        })
-                
-    }) 
-    let data =crearUsuario.json()
+        let usuarios = obtenerUsuario()
+        usuarios.then(async usrs=> {
+        let arrayUsuario = Array.from(usrs)
+        let usuario_encontrado = arrayUsuario.find(e=>  e.idcedula_usr ==cedula  )
 
-    if(crearUsuario.status != 200) {
-        alertas('alert-denied', 'Lo sentimos hubo un error  intentelo ma tarde' + crearUsuario.status )
-    }else{
-        alertas('alert-accepted','El usuario se ha creado correctamente')
-    }
+            
+        
+        if(usuario_encontrado){
+        
+            alertas('alert-denied','Lo sentimos la cédula que ha ingresado ya existe, Intentelo de nuevo')
+        
+        }else{
+            
+            let crearUsuario = await fetch(API,{
+             method:'POST',
+             mode:'cors',
+             credentials:'same-origin',
+             headers:{
+                 'Content-Type' : 'application/json;'
+             },
+             body:JSON.stringify({
+                 'idcedula_usr':cedula,
+                 'alias_usr':alias,
+                 'contrasena_usr': contraseña,
+                 'correo_usr': correo,
+                 'nombres_usr': nombres,
+                 'apellidos_usr': apellidos,
+                 'direccion_usr': direccion,
+                 'telefono_usr': telefono,
+                 'tipoUsr' : '1'
+             })
+                     
+         }) 
+        
+         if(crearUsuario.status != 200) {
+             alertas('alert-denied', 'Lo sentimos el correo ingresado ya existe , Intentelo con otro correo ' )
+         }else{
+             alertas('alert-accepted','El usuario se ha creado correctamente , Puedes hacer login')
+         }
+        }
+           
+    })
+
 }
+
 
 try {
     
@@ -131,7 +137,7 @@ try {
         let telefono_usr = document.getElementById('telefono')
        
         btn_registro.addEventListener('click',crearUnUsuario(alias_usr.value , nombres_usr.value , apellidos_usr.value , idcedula_usr.value , direccion_usr.value , telefono_usr.value , emailInput.value, inputPassword.value))
-    
+                
         alias_usr.value = ""
         nombres_usr.value = ""
         apellidos_usr.value= ""
