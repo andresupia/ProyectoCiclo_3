@@ -32,47 +32,47 @@
           </nav>
 
         <div class="mb-3 position-relative ">
-            <input type="text" class="form-control p-2" id="usuario" placeholder="Nombre de usuario" autocomplete="off" required name="
+            <input type="text" class="form-control p-2" id="usuario" placeholder="Nombre de usuario"  required name="
             usuario">
             <i class="bi bi-person position-absolute"></i>
         </div>
 
         <div class="mb-3 position-relative">
-            <input type="text" class="form-control p-2" id="nombre" placeholder="Nombres" autocomplete="off" required name="nombre">
+            <input type="text" class="form-control p-2" id="nombre" placeholder="Nombres"  required name="nombre">
             <i class="bi bi-person-lines-fill position-absolute"></i>
 
         </div>
 
         
         <div class="mb-3 position-relative">
-            <input type="text" class="form-control p-2" id="apellidos" placeholder="Apellidos" autocomplete="off" required name="apellidos" >
+            <input type="text" class="form-control p-2" id="apellidos" placeholder="Apellidos"  required name="apellidos" >
             <i class="bi bi-person-lines-fill position-absolute"></i>
         </div>
 
         <div class="mb-3 position-relative">
-            <input type="email" class="form-control email p-2" id="email" placeholder="Ingrese un correo" autocomplete="off" required name="email">
+            <input type="email" class="form-control email p-2" id="email" placeholder="Ingrese un correo"  required name="email">
             <i class="bi bi-envelope position-absolute"></i>
         </div>
 
         
         <div class="mb-3 position-relative">
-            <input type="number" class="form-control p-2" id="cedula" placeholder="Ingrese su cedula" autocomplete="off" required name="cedula" >
+            <input type="text" class="form-control p-2" id="cedula" placeholder="Ingrese su cedula"  required name="cedula" minlength="10" maxlength="10" pattern="^\d+$" title="Ingrese solo numeros">
             <i class="bi bi-credit-card-2-front position-absolute"></i>
         </div>
 
 
         <div class="mb-3 position-relative">
-            <input type="text" class="form-control p-2" id="direccion" placeholder="Dirección" autocomplete="off" required name="direccion" >
+            <input type="text" class="form-control p-2" id="direccion" placeholder="Dirección"  required name="direccion" >
             <i class="bi bi-house position-absolute"></i>
         </div>
 
         <div class="mb-3 position-relative">
-            <input type="number" class="form-control p-2" id="telefono" placeholder="telefono" autocomplete="off" required name="telefono" >
+            <input type="text" class="form-control p-2" id="telefono" placeholder="telefono"  required name="telefono" minlength="10" maxlength="10" pattern="^\d+$"  title="Ingrese solo numeros">
             <i class="bi bi-phone position-absolute"></i>
         </div>
 
         <div class="mb-3 position-relative">
-            <input type="password" class="form-control p-2" id="password" placeholder="Ingrese una contraseña" autocomplete="off" required name="password">
+            <input type="password" class="form-control p-2" id="password" placeholder="Ingrese una contraseña"  required name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" title="la contraseña debe de contener : Minimo 8 caracteres , Maximo 15 , Al menos una letra mayúscula , Al menos una letra minucula , Al menos un dígito ,No espacios en blanco , Al menos 1 caracter especial">
             <i class="bi bi-eye  position-absolute" id="bi-eye"></i>
         </div>
 

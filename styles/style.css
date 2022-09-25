@@ -166,23 +166,23 @@ details div{
 }
 .container-alert div{
     display: flex;
-    align-content: center;
-    border: 1px solid #eee;
-    max-width: 70%;
+    max-width: 400px;
     max-height: 150px;
     overflow: auto;
     padding: 10px;
-    margin-left:10px;
-    border-radius: 8px;
+    margin:10px;
+    border-radius: 10px;
+    /* align-items: center; */
 }
 
-.container-alert div p{
+/* .container-alert div p{
     display: inline-block;
-}
+    overflow-wrap: anywhere;
+    height: 100%;
+} */
 .container-alert div button{
     margin: 8px;
-    padding: 8px;
-    
+    padding: 8px;   
 }
 
 .alert-denied{
