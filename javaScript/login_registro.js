@@ -74,14 +74,14 @@ async function obtenerUsuario(urlApi){
 }
 
 
-async function crearUnUsuario(alias , nombres , apellidos, cedula , direccion, telefono , correo, contraseña){
+async function crearUnUsuario(form){
 
         let usuarios = obtenerUsuario(API)
         usuarios.then(async usrs=> {
             let arrayUsuario = Array.from(usrs)
-            let cedula_encontrado = arrayUsuario.find(e=>  e.idcedula_usr ==cedula)
-            let correo_encontrado = arrayUsuario.find(e=> e.correo_usr == correo)
-            let contraseña_encontrada = arrayUsuario.find(e=> e.contrasena_usr == contraseña)
+            let cedula_encontrado = arrayUsuario.find(e=>  e.idcedula_usr ==form.get('cedula'))
+            let correo_encontrado = arrayUsuario.find(e=> e.correo_usr == form.get('correo'))
+            let contraseña_encontrada = arrayUsuario.find(e=> e.contrasena_usr == form.get('password'))
                 
             
             if(cedula_encontrado){
@@ -105,15 +105,15 @@ async function crearUnUsuario(alias , nombres , apellidos, cedula , direccion, t
                         'Content-Type' : 'application/json;'
                     },
                     body:JSON.stringify({
-                        'idcedula_usr':cedula,
-                        'alias_usr':alias,
-                        'contrasena_usr': contraseña,
-                        'correo_usr': correo,
-                        'nombres_usr': nombres,
-                        'apellidos_usr': apellidos,
-                        'direccion_usr': direccion,
-                        'telefono_usr': telefono,
-                        'tipoUsr' : '1'
+                        'idcedula_usr':form.get('cedula'),
+                        'alias_usr':form.get('usuario'),
+                        'contrasena_usr': form.get('password'),
+                        'correo_usr': form.get('correo'),
+                        'nombres_usr': form.get('nombre'),
+                        'apellidos_usr': form.get('apellidos'),
+                        'direccion_usr': form.get('direccion'),
+                        'telefono_usr': form.get('telefono'),
+                        'tipoUsr' : form.get('tipoUsr')
                     })
                             
                 }) 
@@ -143,25 +143,9 @@ try {
     formulario_registro.onsubmit = (e)=>{
         e.preventDefault()
         
-        let btn_registro = document.getElementById('btn-registro')
-    
-        let alias_usr = document.getElementById('usuario')
-        let nombres_usr = document.getElementById('nombre')
-        let apellidos_usr = document.getElementById('apellidos')
-        let idcedula_usr =  document.getElementById('cedula')
-        let direccion_usr =  document.getElementById('direccion')
-        let telefono_usr = document.getElementById('telefono')
-       
-        crearUnUsuario(alias_usr.value , nombres_usr.value , apellidos_usr.value , idcedula_usr.value , direccion_usr.value , telefono_usr.value , emailInput.value, inputPassword.value)
-                
-        alias_usr.value = ""
-        nombres_usr.value = ""
-        apellidos_usr.value= ""
-        idcedula_usr.value = ""
-        direccion_usr.value = ""
-        telefono_usr.value = ""
-        emailInput.value = ""
-        inputPassword.value = ""
+        let form = new FormData(formulario_registro)
+        crearUnUsuario(form)
+        
     }
 } catch (error) {
     console.log(error)
@@ -190,15 +174,12 @@ try {
 
                 btn_login.onclick = setTimeout(function(){
                     location.href="../cliente/main.html"
-                },100000)
+                },2000)
                         
             }else{
                 alertas('alert-denied', 'El email o la contraseña no ha sido encontrado , Por favor revise que la información añadida esté escrita correctamente , Caso contrario realize el formulario de registro')
             }
 
-
-            emailInput.value= ""
-            inputPassword.value = ""
         })
 
     }   
