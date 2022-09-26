@@ -1,3 +1,5 @@
+import {alertas} from "./module.js"
+const API = 'http://localhost:8080/usuario'
 // funcion constructura de libros
 function libros(nombre, autor , editorial, categoria , cantidad, ediccion){
     this.nombre = nombre
@@ -36,6 +38,9 @@ añadirLibro.addEventListener("click",()=>{
 
 })
 
+// array con los objetos libros
+const lista_libros = JSON.parse(localStorage.getItem('libro')) || []
+
 
 
 // funcion para obtener los libros dentro del localStorage
@@ -49,10 +54,10 @@ function eliminar(){
 let eventoEliminar = document.querySelectorAll(".boton-eliminar")
 eventoEliminar.forEach((elemento)=>{
     elemento.addEventListener("click",()=>{
-      
+        
         elemento.parentElement.parentElement.remove()
         
-        encontrado =  lista_libros.find(e=> e.nombre ==  elemento.parentElement.parentElement.children[0].textContent)
+        let encontrado =  lista_libros.find(e=> e.nombre ==  elemento.parentElement.parentElement.children[0].textContent)
         let indice = lista_libros.findIndex(element=> element==encontrado)
         lista_libros.splice(indice,1)
 
@@ -150,9 +155,6 @@ function htmlLibro(elemento){
 // atrapando y mostrando la informacion ingresada por el usuario en la opcion añadir libro
 let contenedor_libros  = document.getElementById("container-libros")
 
-// array con los objetos libros
-const lista_libros = JSON.parse(localStorage.getItem('libro')) || []
-
 // funcion  para mostrar aquellos libros que esten en el localStorage
 function mostar(){
     for (const i of lista_libros) {
@@ -236,3 +238,45 @@ buscador.addEventListener("keyup" , (e) =>{
     if(e.key ==="Escape")e.target.value =""
 
 })  
+
+// perfil del usuario
+let alias_Usr = document.getElementById('nombreUsr')
+alias_Usr.textContent= JSON.parse( localStorage.getItem('usuarioAlias'))
+
+async function  borrarUsuario(urlApi, id){
+    let confirmacion_eliminar = document.getElementById('confirmacion-eliminar-usr')
+    let btnSI = document.getElementById('btn-si')
+    let btnCancelar = document.getElementById('btn-cancelar')
+
+    confirmacion_eliminar.classList.replace('close','open')
+
+    btnSI.addEventListener('click',async()=>{
+        let eliminar = await fetch(`${urlApi}/${id}` , {
+            method:'DELETE'
+        })
+    
+        if(eliminar.status!= 200){
+            alertas('alert-denied', 'Lo sentimos hubo un error al eliminar su cuenta , Intentelo mas tarde')
+        }else{
+            alertas('alert-accepted', 'Usuario eliminado correctamente')
+            
+            setTimeout(function(){
+                location.href="../cliente/login.html"
+            },5000)
+
+        }
+    })
+
+    btnCancelar.addEventListener('click',()=>{
+        confirmacion_eliminar.classList.replace('open','close')
+    })
+
+    
+}
+
+
+let liEliminarUsuario = document.getElementById('eliminar-Usuario')
+liEliminarUsuario.addEventListener('click',()=>{
+    borrarUsuario(API,JSON.parse(localStorage.getItem('usuarioID')))
+})
+
