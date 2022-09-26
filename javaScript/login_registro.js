@@ -1,3 +1,5 @@
+import { alertas} from "./module.js"
+
 // Login :
 // evento  sobre el input email login 
 let emailInput =document.getElementById('email')
@@ -39,28 +41,6 @@ iconPassword.addEventListener("click", ()=>{
 
     }
 })
-
-
-// alertas al usuario
-
-function alertas(claseDiv , textoP){
-    let sectionAlert = document.getElementById('container-alert')
-    sectionAlert.classList.add('open')
-
-    let div_informacion = document.getElementById('div-container-information')    
-    div_informacion.classList.add(claseDiv)
-
-    let p_informacion = document.getElementById('pInformacion-alert')
-    p_informacion.innerHTML = textoP
-    
-    let button_close = document.getElementById('btn_close-alert')
-    button_close.addEventListener('click',()=>{
-       sectionAlert.classList.remove('open')
-       div_informacion.classList.remove(claseDiv)
-    })
-}
-
-
 
 
 // peticion de creacion de usuario  a la api 
@@ -152,7 +132,6 @@ try {
 }
 
 
-
 // previniendo el evento onsubmit del formulario login  y haciendo login 
 
 try {
@@ -162,12 +141,13 @@ try {
         
         e.preventDefault()
         
-        let usuarios = obtenerUsuario(API)
-        usuarios.then(usrs=> {
+       let usuarios = obtenerUsuario(API)
+       usuarios.then(usrs=> {
             let arrayUsuarios = Array.from(usrs)
         
             let usr = arrayUsuarios.find(e=> e.correo_usr == emailInput.value) ?? false
-           
+            localStorage.setItem('usuarioID',JSON.stringify(usr.idcedula_usr))
+            localStorage.setItem('usuarioAlias',JSON.stringify(usr.alias_usr))
 
             if(usr.correo_usr == emailInput.value && usr.contrasena_usr == inputPassword.value){
                 alertas('alert-accepted','Bienvenido ' + usr.alias_usr)
