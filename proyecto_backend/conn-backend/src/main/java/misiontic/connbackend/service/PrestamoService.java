@@ -1,6 +1,7 @@
 package misiontic.connbackend.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,19 @@ public class PrestamoService {
 
     public Prestamo guardarPrestamo(Prestamo prestamo){
         return prestamoRepository.save(prestamo);
+    }
+
+    public boolean eliminarPrestamo(Integer id){
+        try{
+            prestamoRepository.deleteById(id);
+            return true;
+        }catch(Exception err){
+            return false;
+        }
+    }
+
+    public Optional<Prestamo> obtenerPorIdPrestamo(Integer id){
+        return prestamoRepository.findById(id);
     }
 
 }

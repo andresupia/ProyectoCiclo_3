@@ -25,9 +25,11 @@ public class Libro {
     private String autor_lbr;
     @Column(nullable = true, length = 50)
     private String edicion_lbr;
+
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false, length = 11)    
-    private Categoria categoria_lbr; 
+    private Categoria categoriaLbr; 
+    
     private Integer disponible_lbr;       
     private Integer copiasdisp_lbr;
 

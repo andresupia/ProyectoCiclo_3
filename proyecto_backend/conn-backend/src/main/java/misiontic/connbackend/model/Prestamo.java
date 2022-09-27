@@ -2,11 +2,7 @@ package misiontic.connbackend.model;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedDate;
 
@@ -17,6 +13,9 @@ import lombok.Data;
 @Table(name = "prestamo")
 public class Prestamo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false, length = 20)    
+    private Integer idPrestamo;
     @CreatedDate
     private Date fechaCreacion;
     @CreatedDate
