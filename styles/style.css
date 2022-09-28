@@ -230,6 +230,49 @@ details div{
     /* display: none; */
 
 }
+
+.nombreUsr{
+    margin-left: 15px;
+}
+
+.nombreUsr:hover{
+    cursor:default ;    
+}
+
+
+.editar-perfil{
+    cursor: pointer;
+}
+
+.cerrar-sesion{
+    text-decoration: none;
+    color: black;
+}
+.cerrar-sesion:hover{
+    color: black;
+}
+
+
+.actualizar-perfil{
+    position: absolute;
+    max-width: 300px;
+    min-width: 280px;
+    z-index: 1;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.actualizar-perfil form{
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.actualizar-perfil input{
+    font-size: 14px;
+}
+
 @media(min-width:768px){
     .container-añadir-libro , .container-editar-libro{
         position: fixed;
@@ -240,4 +283,12 @@ details div{
         transform: translateX(-100%);
        border-radius: 20px 0 0 20px;
     }  
+
+    .actualizar-perfil{
+        left: 100%;
+        transform: translate(-100%,-50%);
+    
+    }
+
+    
 }
