@@ -31,12 +31,14 @@
                   Perfil
                   </a>
                   <ul class="dropdown-menu container-options">
-                    <li class="dropdown-item nombreUsr" id="nombreUsr"></li>
+                    <li class="nombreUsr" id="nombreUsr"></li>
                     <li><hr class="dropdown-divider"></li>
-                    <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+                    <li class="dropdown-item editar-perfil" id="editar-perfil">Editar Perfil</li>
+                    <li class="dropdown-item"><a class="cerrar-sesion" href="../cliente/login.html"> Cerrar sesión</a></li>
+                    <!-- <li class="dropdown-item editar-perfil" id="editar-perfil">Editar Perfil</li>
+                    <li><a class="dropdown-item" href="../cliente/login.html">Cerrar sesión</a></li> -->
+                    <li><hr class="dropdown-divider"></li>
                     <li class="dropdown-item eliminar-Usuario" id="eliminar-Usuario">Eliminar mi cuenta</li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../cliente/login.html">Cerrar sesión</a></li>
                   </ul>
                 </li>
                 
@@ -58,13 +60,66 @@
       </nav>
 
 
-      <!-- alertas al usuario -->
-    <section class="position-absolute  my-3 container-alert"  id="container-alert">
-      <div id="div-container-information">
-          <p id="pInformacion-alert"></p>
-          <button class="btn-close" id="btn_close-alert"></button>
-      </div>
-   </section>
+      <!-- editar usuario -->
+      <section class="actualizar-perfil close" id="contenedor-editar-perfil">
+        <form id="form-editar-usuario">
+          
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Usuario" id="usuario-actualizado" name="alias_usr" >
+            <label for="usuario-actualizado">usuario </label>
+          </div>
+        
+
+         
+          
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Nombres" id="nombres-actualizados"  name="nombres_usr" >
+            <label for="nombres-actualizados">Nombres</label>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Apellidos" id="apellidos-actualizados" name="apellidos_usr" >
+            <label for="apellidos-actualizados">Apellidos</label>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input class="form-control" type="email" placeholder="correo" id="correo-actualizado"  name="correo_usr" pattern="^[^ ]+@[^ ]+\.[a-z]{2,3}$" >
+            <label for="correo-actualizado">Correo</label>
+          </div>
+
+          
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Contraseña" id="contraseña-actualizado"  name="contrasena_usr"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$" title="la contraseña debe de contener : Minimo 8 caracteres , Maximo 15 , Al menos una letra mayúscula , Al menos una letra minucula , Al menos un dígito ,No espacios en blanco , Al menos 1 caracter especial">
+            <label for="contraseña-actualizado">Contraseña</label>
+          </div>
+
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Dirección" id="direccion-actualizada" name="direccion_usr" >
+            <label for="direccion-actualizada">Dirección</label>
+          </div>
+        
+          <div class="form-floating mb-1">
+            <input class="form-control" type="text" placeholder="Telefono" id="telefono-actualizado"  name="telefono_usr" minlength="10" maxlength="10" pattern="^\d+$"  title="Ingrese solo numeros">
+            <label for="telefono-actualizado">Telefono</label>
+          </div>
+
+          <div class="mb-2 form-floating ">
+            <input list="tipoUsr"  class="form-control"  placeholder="Tipo de usuario"  id="tipoUsr-actualizado" name="tipoUsr">
+            <label for="tipoUsr-actualizado"> Tipo de usuario </label>
+            <datalist id="tipoUsr">
+                <option value="1">Administrador</option>
+                <option value="2">Usuario</option>
+                <option value="3">Empleado</option>
+            </datalist>
+        </div>
+
+        <button class="btn btn-info text-white" type="submit">Actualizar</button>
+        <button class="btn btn-primary float-end" id="cancelar-editar-usuario" type="button">Cancelar</button>
+        
+        </form>
+
+
+      </section>
 
    <!-- eliminacion de la cuenta -->
     <section class="position-absolute  my-3 confirmacion-eliminar-usr close"  id="confirmacion-eliminar-usr">
@@ -75,6 +130,14 @@
     </div>
     </section>
 
+    <!-- alertas al usuario -->
+    <section class="position-absolute  my-3 container-alert"  id="container-alert">
+      <div id="div-container-information" >
+          <p id="pInformacion-alert">
+          </p>
+          
+      </div>
+  </section>
 
     <section class="position-absolute  my-3 confirmacion-eliminar-libro close"  id="confirmacion-eliminar-libro">
       <div>
@@ -87,37 +150,47 @@
       <!-- contenedor del  formulario añadir libro  -->
       <section class=" container  p-4  container-añadir-libro">
         <h4 class="p-2" >Añadir libro</h4>
-        <form action="#" role="form"  id="form-añadir-libro">
+        <form action="#" role="form"  id="form-añadir-libro" autocomplete="off">
           
           <div class="form-floating mb-2 ">
-            <input  class="form-control" type="text" id="nombre-libro" name="nombre-libro" required autocomplete="off" placeholder="Nombre">
+            <input  class="form-control" type="text" id="nombre-libro" name="nombre-libro" required placeholder="Nombre">
             <label for="nombre-libro" class="">Nombre </label>
           </div>
       
           <div class="form-floating mb-2">
-            <input  class="form-control" type="text" id="autor-libro" name="autor-libro" required autocomplete="off" placeholder="Autor" >
+            <input  class="form-control" type="text" id="autor-libro" name="autor-libro" required placeholder="Autor" >
             <label for="autor-libro" class="">Autor </label>
           </div>
           
           <div class=" form-floating mb-2">
-            <input  class="form-control" type="text" id="editorial-libro" name="editorial-libro" required autocomplete="off" placeholder="Editorial" >
+            <input  class="form-control" type="text" id="editorial-libro" name="editorial-libro" required placeholder="Editorial" >
             <label for="editorial-libro" class="">Editorial</label>
           </div>
 
           <div class="form-floating mb-2">
-            <input  class="form-control" type="text" id="categoria-libro" name="categoria-libro" required autocomplete="off"  placeholder="Categoria" min="1">
+            <input  class="form-control" list="lista-categoria" id="categoria-libro" name="categoria-libro" required  placeholder="Categoria">
             <label for="categoria-libro" class="">Categoria</label>
+            <datalist id="lista-categoria">
+              <option value="1">Literatura</option>
+              <option value="2">Ficción</option>
+              <option value="3">Drama</option>
+              <option value="4">Terror</option>
+              <option value="5">Documental</option>
+              <option value="6">Programación</option>
+              <option value="7">Diseño</option>
+              <option value="8">Fantasia</option>
+            </datalist>
           </div>
           
           
           <div class="form-floating mb-2">
-            <input  class="form-control" type="number" id="cantidad-libro" name="cantidad-libro" required autocomplete="off"  placeholder="Cantidad" min="1">
+            <input  class="form-control" type="number" id="cantidad-libro" name="cantidad-libro" required  placeholder="Cantidad" min="1">
             <label for="cantidad-libro" class="">Cantidad</label>
           </div>
 
           
           <div class="form-floating">
-            <input  class="form-control" type="number" id="ediccion-libro" name="ediccion-libro" required autocomplete="off"  placeholder="Edicción" min="1">
+            <input  class="form-control" type="number" id="ediccion-libro" name="ediccion-libro" required  placeholder="Edicción" min="1">
             <label for="ediccion-libro" class="">Edicción</label>
           </div>
           
@@ -148,8 +221,19 @@
           </div>
 
           <div class="form-floating mb-2">
-            <input  class="form-control" type="text" id="nuevo-categoria-libro" name="nuevo-categoria-libro" required autocomplete="off"  placeholder="Categoria">
+            <input  class="form-control" id="nuevo-categoria-libro" list="editar-categoria" name="nuevo-categoria-libro" required autocomplete="off"  placeholder="Categoria" >
             <label for="nuevo-categoria-libro" class="">Categoria </label>
+            <datalist id="editar-categoria">
+              <datalist id="lista-categoria">
+                <option value="1">Literatura</option>
+                <option value="2">Ficción</option>
+                <option value="3">Drama</option>
+                <option value="4">Terror</option>
+                <option value="5">Documental</option>
+                <option value="6">Programación</option>
+                <option value="7">Diseño</option>
+                <option value="8">Fantasia</option>
+              </datalist>
           </div>
           
           
