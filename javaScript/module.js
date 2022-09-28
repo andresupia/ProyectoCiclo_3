@@ -9,10 +9,16 @@ export function alertas(claseDiv , textoP){
     p_informacion.innerHTML = textoP
     
     let button_close = document.getElementById('btn_close-alert')
-    button_close.addEventListener('click',()=>{
-       sectionAlert.classList.remove('open')
-       div_informacion.classList.remove(claseDiv)
-    })
+
+    setTimeout(()=>{
+        sectionAlert.classList.remove('open')
+        div_informacion.classList.remove(claseDiv)
+    },4000)
 }
 
 
+export async function obtener(urlApi){
+    let users = await fetch(urlApi)
+    let data  = await users.json()
+    return data
+}
