@@ -1,4 +1,4 @@
-import { alertas} from "./module.js"
+import { alertas,obtener} from "./module.js"
 
 // Login :
 // evento  sobre el input email login 
@@ -47,16 +47,9 @@ iconPassword.addEventListener("click", ()=>{
 
 const API = 'http://localhost:8080/usuario'
 
-async function obtenerUsuario(urlApi){
-    let users = await fetch(urlApi)
-    let data  = await users.json()
-    return data
-}
-
-
 async function crearUnUsuario(form){
 
-        let usuarios = obtenerUsuario(API)
+        let usuarios = obtener(API)
         usuarios.then(async usrs=> {
             let arrayUsuario = Array.from(usrs)
             let cedula_encontrado = arrayUsuario.find(e=>  e.idcedula_usr ==form.get('cedula'))
@@ -115,8 +108,6 @@ async function crearUnUsuario(form){
 
 }
 
-
-
 // previniendo el evento onsubmit del formulario registro y creando el usuario 
 try {
     const formulario_registro = document.getElementById('singUp-form')
@@ -141,7 +132,7 @@ try {
         
         e.preventDefault()
         
-       let usuarios = obtenerUsuario(API)
+       let usuarios = obtener(API)
        usuarios.then(usrs=> {
             let arrayUsuarios = Array.from(usrs)
         
