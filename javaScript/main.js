@@ -87,30 +87,51 @@ async function crear_Y_actualizar_libro(urlApi,id,autor,ediccion,categoria,canti
     }
 }
 
-// funcion para remover libros dentro del array, el DOM y de la api 
+// funcion para remover libros dentro del array y de la api 
 function eliminar(){
 let eventoEliminar = document.querySelectorAll(".boton-eliminar")
 eventoEliminar.forEach((elemento)=>{
     elemento.addEventListener("click", async ()=>{
-        
-        elemento.parentElement.parentElement.remove()
-        
-        let encontrado =  lista_libros.find(e=> e.titulo_lbr ==  elemento.parentElement.parentElement.children[0].textContent)
-        let indice = lista_libros.findIndex(element=> element==encontrado)
-        lista_libros.splice(indice,1)
 
-        
-        let borrarEnApi = await fetch(`${API_LIBRO}/${encontrado.idlibro_lbr}`,{
-            method:'DELETE'
+        let eliminarLibro = document.getElementById('confirmacion-eliminar-libro')
+        eliminarLibro.classList.replace('close','open')
+
+        let btn_si_libro = document.getElementById('btn-si-libro')
+        btn_si_libro.addEventListener('click', async ()=>{
+
+            contenedor_libros.innerHTML =""
+           
+            elemento.parentElement.parentElement.remove()
+           
+            
+            let encontrado =  lista_libros.find(e=> e.titulo_lbr ==  elemento.parentElement.parentElement.children[0].textContent)
+            let indice = lista_libros.findIndex(element=> element==encontrado)
+            lista_libros.splice(indice,1)
+    
+            
+            let borrarEnApi = await fetch(`${API_LIBRO}/${encontrado.idlibro_lbr}`,{
+                method:'DELETE'
+            })
+    
+            if(borrarEnApi.status != 200){
+                alertas('alert-denied','El libro no a podido ser eliminado , Por favor intentelo de nuevo')
+            }
+            else{
+                obtenerLibros()
+                alertas('alert-accepted', 'El libro ha sido eliminado con exito')
+                
+            }
+
+            eliminarLibro.classList.replace('open','close')
+
         })
 
-        if(borrarEnApi.status != 200){
-            alertas('alert-denied','El libro no a podido ser eliminado , Por favor intentelo de nuevo')
-        }
-        else{
+        let btn_cancelar_libro = document.getElementById('btn-cancelar-libro')
+        btn_cancelar_libro.addEventListener('click',()=>{
+            
+            eliminarLibro.classList.replace('open','close')
 
-            alertas('alert-accepted', 'El libro ha sido eliminado con exito')
-        }
+        })
 
         })
     })
@@ -247,10 +268,27 @@ form_añadir.onsubmit = async (e)=>{
         let valor_categoria = categoria_libro.value
         let valor_ediccion = ediccion_libro.value
 
-    
+        let buscar_libro= obtener(API_LIBRO)
+        .then(data => {
+            let usuario = [...data]
+            let encontrado = usuario.find(e=> e.titulo_lbr == valor_nombre) ?? false
 
-        crear_Y_actualizar_libro(API_LIBRO,0,valor_autor_libro,valor_ediccion,valor_categoria
-            ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )
+            if(encontrado){
+                obtenerLibros()
+                alertas('alert-denied' , 'Ya se encuentra un libro con el mismo nombre')
+                
+
+            }
+            else{
+                
+                crear_Y_actualizar_libro(API_LIBRO,0,valor_autor_libro,valor_ediccion,valor_categoria
+                ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )
+
+            }
+
+            
+        })
+    
 
         let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
         containerAñadirlibro.classList.remove("open-container-añadir")
@@ -301,7 +339,7 @@ alias_Usr.textContent= JSON.parse( localStorage.getItem('usuarioAlias'))
 
 // borrar usuario
 async function  borrarUsuario(urlApi, id){
-    let confirmacion_eliminar = document.getElementById('confirmacion-eliminar-usr')
+    let confirmacion_eliminar = document.getElementById('confirmacion-eliminar')
     let btnSI = document.getElementById('btn-si')
     let btnCancelar = document.getElementById('btn-cancelar')
 
@@ -418,3 +456,5 @@ cancelar_editar_usuario.addEventListener('click', cancelarActualizacion)
 function cancelarActualizacion(){
     container_editar_perfil.classList.replace('open','close')
 }
+
+
