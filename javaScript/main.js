@@ -1,6 +1,11 @@
-import {alertas, obtener} from "./module.js"
+import {alertas, obtener,datalist_libros} from "./module.js"
 const API_USUARIO = 'http://localhost:8080/usuario'
 const API_LIBRO = 'http://localhost:8080/libro'
+
+
+// etiqueta donde se mostrara la informacion ingresada por el usuario en la opcion añadir libro
+let contenedor_libros  = document.getElementById("container-libros")
+
 // funcion constructura de libros
 function libros(nombre, autor , editorial, categoria , cantidad, ediccion){
     this.nombre = nombre
@@ -87,56 +92,45 @@ async function crear_Y_actualizar_libro(urlApi,id,autor,ediccion,categoria,canti
     }
 }
 
-// funcion para remover libros dentro del array y de la api 
-function eliminar(){
-let eventoEliminar = document.querySelectorAll(".boton-eliminar")
-eventoEliminar.forEach((elemento)=>{
-    elemento.addEventListener("click", async ()=>{
+// evento eliminar
+let i_contenedor = document.querySelector('.contenedor-eliminar')
+let div_contenedor_form = document.getElementById('contenedor-form-eliminar')
+let input_eliminar = document.getElementById('input-eliminar')
 
-        let eliminarLibro = document.getElementById('confirmacion-eliminar-libro')
-        eliminarLibro.classList.replace('close','open')
+let datalist = document.getElementById('list-libros')
+i_contenedor.addEventListener('click',()=>{
 
-        let btn_si_libro = document.getElementById('btn-si-libro')
-        btn_si_libro.addEventListener('click', async ()=>{
-
-            contenedor_libros.innerHTML =""
-           
-            elemento.parentElement.parentElement.remove()
-           
-            
-            let encontrado =  lista_libros.find(e=> e.titulo_lbr ==  elemento.parentElement.parentElement.children[0].textContent)
-            let indice = lista_libros.findIndex(element=> element==encontrado)
-            lista_libros.splice(indice,1)
+    div_contenedor_form.classList.toggle('open')
+    datalist_libros(API_LIBRO)
+   
     
-            
-            let borrarEnApi = await fetch(`${API_LIBRO}/${encontrado.idlibro_lbr}`,{
-                method:'DELETE'
-            })
+})
+
+
+let form_eliminar = document.getElementById('form-eliminar')
+let confirmacion_eliminar = document.getElementById('confirmacion-eliminar-libro')
+form_eliminar.onsubmit = async (e)=>{
     
-            if(borrarEnApi.status != 200){
-                alertas('alert-denied','El libro no a podido ser eliminado , Por favor intentelo de nuevo')
-            }
-            else{
-                obtenerLibros()
-                alertas('alert-accepted', 'El libro ha sido eliminado con exito')
-                
-            }
-
-            eliminarLibro.classList.replace('open','close')
-
-        })
-
-        let btn_cancelar_libro = document.getElementById('btn-cancelar-libro')
-        btn_cancelar_libro.addEventListener('click',()=>{
-            
-            eliminarLibro.classList.replace('open','close')
-
-        })
-
-        })
+    contenedor_libros.innerHTML=""
+    let borrarUsuario =await  fetch(`${API_LIBRO}/${input_eliminar.value}`,{
+        method:'DELETE'
     })
 
+    if(borrarUsuario.status !=200){
+        alertas('alert-denied', 'No se ha eliminado  el libro , Intentelo mas tarde')
+        div_contenedor_form.classList.remove('open')
+        confirmacion_eliminar.classList.replace('open','close')
+    }
+    else{
+        div_contenedor_form.classList.remove('open')
+        alertas('alert-accepted', 'El libro se eliminado correctamente')
+        obtenerLibros()
+       
+        confirmacion_eliminar.classList.replace('open','close')
+    }
 }
+
+
 
 
 // funcion para editar un libro en el Dom ,dentro de array y de la api 
@@ -174,6 +168,7 @@ function editar(){
                 evento.preventDefault()
 
                 contenedor_libros.innerHTML=""
+        
                 
                 e.parentElement.parentElement.children[0].textContent  = nuevo_nombre.value
 
@@ -201,9 +196,8 @@ function editar(){
                 nuevo_categoria_libro.value = ""
                 nuevo_cantidad_libro.value = ""
                 nuevo_ediccion_libro.value = ""
-    
+
                 
-    
                 contenedor_editar.classList.remove("open-container-editar")
 
             }           
@@ -227,8 +221,7 @@ function htmlLibro(elemento){
 }
 
 
-// etiqueta donde se mostrara la informacion ingresada por el usuario en la opcion añadir libro
-let contenedor_libros  = document.getElementById("container-libros")
+
 
 // funcion  para mostrar aquellos libros que esten en el la api y se  agregen al array lista_libros
 function mostar(){
@@ -236,7 +229,7 @@ function mostar(){
 
         htmlLibro(i)
 
-        eliminar()
+    
 
         editar()
     }
@@ -251,6 +244,7 @@ form_añadir.onsubmit = async (e)=>{
         e.preventDefault()
 
         contenedor_libros.innerHTML=""
+        datalist.innerHTML =""
 
         let nombre_libro = document.getElementById("nombre-libro")
         let autor_libro = document.getElementById("autor-libro")
@@ -283,12 +277,12 @@ form_añadir.onsubmit = async (e)=>{
                 
                 crear_Y_actualizar_libro(API_LIBRO,0,valor_autor_libro,valor_ediccion,valor_categoria
                 ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )
-
+                datalist_libros(API_LIBRO)           
             }
-
+            
             
         })
-    
+        
 
         let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
         containerAñadirlibro.classList.remove("open-container-añadir")
@@ -299,9 +293,7 @@ form_añadir.onsubmit = async (e)=>{
         cantidad_libro.value = ""
         categoria_libro.value=""
         ediccion_libro.value = ""
-
         
-        eliminar()
         editar()
 }   
 
@@ -311,7 +303,6 @@ let buscador = document.getElementById("buscador")
 buscador.addEventListener("keyup" , (e) =>{
     let texto =   e.target.value
      
-
     let er = new RegExp(texto,'i')
 
 
@@ -334,6 +325,9 @@ buscador.addEventListener("keyup" , (e) =>{
 })  
 
 // perfil del usuario
+let idUser =  JSON.parse(localStorage.getItem('usuarioID'))
+
+
 let alias_Usr = document.getElementById('nombreUsr')
 alias_Usr.textContent= JSON.parse( localStorage.getItem('usuarioAlias'))
 
@@ -361,13 +355,15 @@ async function  borrarUsuario(urlApi, id){
 
         }
     })
-
+    
     btnCancelar.addEventListener('click',()=>{
         confirmacion_eliminar.classList.replace('open','close')
     })
-
+    
     
 }
+
+
 
 
 let liEliminarUsuario = document.getElementById('eliminar-Usuario')
@@ -397,9 +393,12 @@ btn_editar.addEventListener('click',()=>{
     let telefono_actualizado = document.getElementById('telefono-actualizado')
     let tipoUsr_actualizado = document.getElementById('tipoUsr-actualizado')
     
-    
-    let usr = obtener(`${API_USUARIO}/${localStorage.getItem('usuarioID')}`) 
-     .then(data=>{
+    // console.log(idUser)
+
+
+    let user = obtener(`${API_USUARIO}/${idUser}`)
+    .then(data => {
+
          usuario_actualizado.value =data.alias_usr
          
          nombres_actualizados.value = data.nombres_usr
@@ -456,5 +455,3 @@ cancelar_editar_usuario.addEventListener('click', cancelarActualizacion)
 function cancelarActualizacion(){
     container_editar_perfil.classList.replace('open','close')
 }
-
-

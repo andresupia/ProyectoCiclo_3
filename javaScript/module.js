@@ -22,3 +22,28 @@ export async function obtener(urlApi){
     let data  = await users.json()
     return data
 }
+
+
+export function datalist_libros(urlApi){
+    let datalist_libros = document.getElementById('list-libros')
+    
+    var arrayNombresLibros = []
+    let libros = obtener(urlApi)
+    .then(data =>{
+
+        
+        let nombresLibros = Array.from(data)
+        nombresLibros.forEach(libro => {
+            
+
+           var id = libro.idlibro_lbr
+           var titulo = libro.titulo_lbr
+           arrayNombresLibros.push({titulo,id})
+        })
+
+        let datalist = arrayNombresLibros.map(e=> `<option value="${e.id}">${e.titulo}</option>`) 
+
+        datalist_libros.innerHTML+= datalist
+    }) 
+   
+}

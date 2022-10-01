@@ -41,11 +41,14 @@
                 </li>
                 
                 <li class="nav-item me-4">
-                  <a href="#" class="nav-link active ps-2">Prestamos</a>
+                  <a href="../cliente/prestamos.html" class="nav-link active ps-2">Prestamos</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item me-4">
                   <a class="nav-link botton-añadir-libro active ps-2" aria-hidden="true">Añadir Libro</a>
+                </li>
+
+                <li class="nav-item me-4"><a class="nav-link active contenedor-eliminar"> Borrar un libro</a>
                 </li>
 
             </ul>
@@ -119,6 +122,7 @@
 
       </section>
 
+
    <!-- eliminacion de la cuenta -->
     <section class="position-absolute  my-3 confirmacion-eliminar close"  id="confirmacion-eliminar">
     <div>
@@ -147,6 +151,18 @@
       </div>
       </section>
 
+
+   
+      <div id="contenedor-form-eliminar"   class="contenedor-form-eliminar ">
+        <form  class="formulario-eliminar" id="form-eliminar" autocomplete="off">
+          <input list="list-libros" class="form-control" id="input-eliminar">
+          <button class="btn btn-danger">Eliminar</button>
+          <datalist id="list-libros">
+
+          </datalist>
+        </form>
+        
+      </div>
       <!-- contenedor del  formulario añadir libro  -->
       <section class=" container  p-4  container-añadir-libro">
         <h4 class="p-2" >Añadir libro</h4>
@@ -252,6 +268,8 @@
           <button type="button" class="btn btn-primary mt-4 float-end botton-cancelar ">Cancelar</button>
         </form>
       </section>
+
+      
 
       <!-- contenedor principal donde se agregan los libros del usuario  -->
        <main class="container-libros contianer-fluid " id="container-libros">

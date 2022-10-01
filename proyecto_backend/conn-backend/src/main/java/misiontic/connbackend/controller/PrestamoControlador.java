@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import misiontic.connbackend.model.Prestamo;
 import misiontic.connbackend.service.PrestamoService;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500/")
 @RestController
 @RequestMapping("/prestamo")
 public class PrestamoControlador {

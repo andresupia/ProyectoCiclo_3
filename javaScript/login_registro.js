@@ -96,8 +96,12 @@ async function crearUnUsuario(form){
                     console.log(`Error de conexion , estatus de la peticción : ${crearUsuario.status}`)
                 }else{
                     alertas('alert-accepted','El usuario se ha creado correctamente')
-                    let btn_registro = document.getElementById('btn-registro')
 
+                    localStorage.setItem('usuarioID',JSON.stringify(form.get('cedula')))
+                    localStorage.setItem('usuarioAlias',JSON.stringify(form.get('usuario')))
+
+                    let btn_registro = document.getElementById('btn-registro')
+                    
                     btn_registro.onclick = setTimeout(function(){
                         location.href="../cliente/main.html"
                     },2000)
@@ -131,17 +135,20 @@ try {
     formulario_login.onsubmit=(e)=>{
         
         e.preventDefault()
+        localStorage.removeItem('usuarioID')
+        localStorage.removeItem('usuarioAlias')
         
        let usuarios = obtener(API)
        usuarios.then(usrs=> {
             let arrayUsuarios = Array.from(usrs)
         
             let usr = arrayUsuarios.find(e=> e.correo_usr == emailInput.value) ?? false
-            localStorage.setItem('usuarioID',JSON.stringify(usr.idcedula_usr))
-            localStorage.setItem('usuarioAlias',JSON.stringify(usr.alias_usr))
-
+            
             if(usr.correo_usr == emailInput.value && usr.contrasena_usr == inputPassword.value){
                 alertas('alert-accepted','Bienvenido ' + usr.alias_usr)
+                localStorage.setItem('usuarioID',JSON.stringify(usr.idcedula_usr))
+                localStorage.setItem('usuarioAlias',JSON.stringify(usr.alias_usr))
+
 
                 btn_login.onclick = setTimeout(function(){
                     location.href="../cliente/main.html"
