@@ -60,6 +60,7 @@ function obtenerLibros(){
 
 obtenerLibros()
 
+datalist_libros(API_LIBRO)
 
 async function crear_Y_actualizar_libro(urlApi,id,autor,ediccion,categoria,cantidad,editorial,nombre,mensajeDenied,mensajeAccepted){
     let crearLibroApi = await fetch(urlApi,{
@@ -98,19 +99,22 @@ let div_contenedor_form = document.getElementById('contenedor-form-eliminar')
 let input_eliminar = document.getElementById('input-eliminar')
 
 let datalist = document.getElementById('list-libros')
-i_contenedor.addEventListener('click',()=>{
 
+i_contenedor.addEventListener('click',()=>{
+    datalist.innerHTML=""
     div_contenedor_form.classList.toggle('open')
     datalist_libros(API_LIBRO)
-   
-    
 })
+
+
 
 
 let form_eliminar = document.getElementById('form-eliminar')
 let confirmacion_eliminar = document.getElementById('confirmacion-eliminar-libro')
 form_eliminar.onsubmit = async (e)=>{
-    
+    e.preventDefault()
+
+    datalist.innerHTML =""
     contenedor_libros.innerHTML=""
     let borrarUsuario =await  fetch(`${API_LIBRO}/${input_eliminar.value}`,{
         method:'DELETE'
@@ -140,6 +144,8 @@ function editar(){
     let arrayEditar = Array.from(eventEditar)
     arrayEditar.forEach((e,i,a)=>{
         e.addEventListener('click',()=>{
+
+           
 
             let contenedor_editar = document.getElementById("container-editar-libro")
             contenedor_editar.classList.toggle("open-container-editar")
@@ -242,9 +248,11 @@ let form_añadir = document.getElementById("form-añadir-libro")
 
 form_añadir.onsubmit = async (e)=>{
         e.preventDefault()
-
-        contenedor_libros.innerHTML=""
+        
+      
         datalist.innerHTML =""
+        contenedor_libros.innerHTML=""
+      
 
         let nombre_libro = document.getElementById("nombre-libro")
         let autor_libro = document.getElementById("autor-libro")
@@ -268,32 +276,30 @@ form_añadir.onsubmit = async (e)=>{
             let encontrado = usuario.find(e=> e.titulo_lbr == valor_nombre) ?? false
 
             if(encontrado){
-                obtenerLibros()
                 alertas('alert-denied' , 'Ya se encuentra un libro con el mismo nombre')
-                
-
             }
             else{
                 
                 crear_Y_actualizar_libro(API_LIBRO,0,valor_autor_libro,valor_ediccion,valor_categoria
-                ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )
-                datalist_libros(API_LIBRO)           
-            }
+                ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )  
+                datalist_libros(API_LIBRO)
+            }   
             
             
         })
         
-
+        
+        
         let containerAñadirlibro = document.querySelector(".container-añadir-libro") 
         containerAñadirlibro.classList.remove("open-container-añadir")
-
+        
         nombre_libro.value = ""
         autor_libro.value= ""
         editorial_libro.value = ""
         cantidad_libro.value = ""
         categoria_libro.value=""
         ediccion_libro.value = ""
-        
+       
         editar()
 }   
 
