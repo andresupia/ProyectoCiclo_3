@@ -10,7 +10,7 @@ import misiontic.connbackend.enums.Categoria;
 import misiontic.connbackend.model.Libro;
 import misiontic.connbackend.service.LibroService;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/libro")
 public class LibroControlador {

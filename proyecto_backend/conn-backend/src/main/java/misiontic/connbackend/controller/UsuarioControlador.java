@@ -11,7 +11,7 @@ import misiontic.connbackend.enums.Tipos;
 import misiontic.connbackend.model.Usuario;
 import misiontic.connbackend.service.UsuarioService;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioControlador {
