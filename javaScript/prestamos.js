@@ -1,11 +1,11 @@
 
-import { obtener } from "./module.js"
+import { obtener, datalist_libros} from "./module.js"
 const API_PRESTAMO = 'http://localhost:8080/prestamo'
 const API_LIBRO = 'http://localhost:8080/libro'
 
 const contenedorPrestamos = document.getElementById('container-prestamos')
 
-const datalist_libros = document.getElementById('datalist-prestamos')
+// const datalist_librosapi = document.getElementById('datalist-prestamos')
 
 
 let prestamos = obtener(API_PRESTAMO)
@@ -32,30 +32,7 @@ let prestamos = obtener(API_PRESTAMO)
 })
 
 
-
-
-var arrayNombresLibros = []
-
-let libros = obtener(API_LIBRO)
-    .then(data =>{
-
-        
-        let nombresLibros = Array.from(data)
-        nombresLibros.forEach(libro => {
-            
-
-           var id = libro.idlibro_lbr
-           var titulo = libro.titulo_lbr
-           arrayNombresLibros.push({titulo,id})
-        })
-
-        let datalist = arrayNombresLibros.map(e=> `<option value="${e.id}">${e.titulo}</option>`) 
-       
-
-        datalist_libros.innerHTML+= datalist
-    }) 
-
-
+datalist_libros(API_LIBRO, 'datalist-prestamos')
 
 
 const btn_añadir_prestamo = document.getElementById('prestamos')
@@ -79,26 +56,27 @@ form_prestasmos.onsubmit= async(e)=>{
     let year =fechacreacion.getFullYear()
     let month = fechacreacion.getMonth() + 1
 
-    let fecha = `${year}-${month}-${day}`
+    
+    let fecha = String( year + '-' + month + '-' + day)
 
-    let idLibro =parseInt(input_añadir_libro.value)
+    let idLibro  = input_añadir_libro.value
+    
+    let idcedula_usr =localStorage.getItem('usuarioID')
+    
+    console.log(fecha , idLibro  , idcedula_usr)
+    
 
-    let idcedula_usr = parseInt(localStorage.getItem('usuarioID'))
-
-    // console.log(idLibro,idcedula_usr)
-
-    let crearPrestamo = await fetch(API_PRESTAMO,{
+    let crearPrestamo =  fetch(API_PRESTAMO,{
         method:'POST',
         mode:'cors',
         headers :{
             'Content-Type' : 'application/json'
         },
         body:JSON.stringify({
-            "fechaCreacion" :fecha,
-            "fechaActualizaciion" : fecha,
-            "fkLibro" :{"idlibro_lbr" : idLibro },
-            "fkUsuario" : {"idcedula_usr" : idcedula_usr } 
-    
+            "fechaCreacion" : fecha,
+            "fechaActualizacion" : fecha,
+            "fkLibro" :{"idlibro_lbr" : 2 },
+            "fkUsuario" : {"idcedula_usr" : JSON.parse(localStorage.getItem('usuarioID'))} 
         })
     
     })
@@ -110,7 +88,7 @@ form_prestasmos.onsubmit= async(e)=>{
         console.log("exitosa")
     
     }
-
+        
     
    
 }
@@ -119,7 +97,4 @@ const btn_cancelar_prestamo =document.getElementById('btn-cancelar-prestamo')
 btn_cancelar_prestamo.addEventListener('click',()=>{
     contenedor_form.classList.remove('open')
 })
-
-
- 
 
