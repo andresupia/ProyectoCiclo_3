@@ -24,8 +24,8 @@ export async function obtener(urlApi){
 }
 
 
-export function datalist_libros(urlApi){
-    let datalist_libros = document.getElementById('list-libros')
+export function datalist_libros(urlApi , clase){
+    let datalist_librosAPI = document.getElementById(clase)
     
     var arrayNombresLibros = []
     let libros = obtener(urlApi)
@@ -43,7 +43,7 @@ export function datalist_libros(urlApi){
 
         let datalist = arrayNombresLibros.map(e=> `<option value="${e.id}">${e.titulo}</option>`) 
 
-        datalist_libros.innerHTML+= datalist
+        datalist_librosAPI.innerHTML+= datalist
     }) 
    
 }
