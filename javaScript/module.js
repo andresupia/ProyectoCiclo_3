@@ -47,3 +47,29 @@ export function datalist_libros(urlApi , clase){
     }) 
    
 }
+
+
+
+ export function funcion_datalist_prestamos(url){
+    let datalist_prestamos = document.getElementById('list-libros')
+    
+
+    var arrayNombresprestamos = []
+    let prestamos = obtener(url)
+    .then(data=>{
+        
+        // console.log(data)
+        let arrayPrestamos = Array.from(data)
+
+        arrayPrestamos.forEach(prestamo =>{
+            var id  =  prestamo.idPrestamo
+            var titulo = prestamo.fkLibro.titulo_lbr
+            
+            arrayNombresprestamos.push({titulo,id})
+        })
+
+        let datalist_opciones= arrayNombresprestamos.map(e => `<option value="${e.id}">${e.titulo}</option>`)
+        
+        datalist_prestamos.innerHTML = datalist_opciones
+    })
+}

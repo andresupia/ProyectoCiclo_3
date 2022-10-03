@@ -23,7 +23,7 @@
               <ul class="navbar-nav me-auto mb-2 mb-lg-0 list-options">
 
                 <li class="nav-item dropdown">
-                  <a class="nav-link  active" href="./main.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link  active" href="../cliente/main.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Home
                   </a>
                 </li>
@@ -32,17 +32,45 @@
                   <a class="nav-link botton-añadir-libro active ps-2" aria-hidden="true" id="prestamos">Añadir Prestamo</a>
                 </li>
 
-            </ul>
+                <li class="nav-item me-4"><a class="nav-link active contenedor-eliminar"> Borrar un prestamo</a>
 
-            <form class="d-flex" role="search">
-              <input class="form-control me-2 button-search" type="search" placeholder="Nombre o Autor ..." aria-label="Search" id="buscador" autocomplete="off">
-            </form>
+            </ul>
           </section>
         </div>
       </nav>
 
+
+    <!-- alertas al usuario -->
+    <section class="position-absolute  my-3 container-alert"  id="container-alert">
+      <div id="div-container-information" >
+          <p id="pInformacion-alert">
+          </p>
+          
+      </div>
+  </section>
+
+<!-- eliminar prestamo -->
+  
+  <div id="contenedor-form-eliminar"   class="contenedor-form-eliminar ">
+    <form  class="formulario-eliminar" id="form-eliminar" autocomplete="off">
+      <input list="list-libros" class="form-control" id="input-eliminar">
+      <button class="btn btn-danger">Eliminar</button>
+      <datalist id="list-libros">
+
+      </datalist>
+    </form>
+    
+  </div>
+
       <section class="container-form-prestamos" id="contenedor-form-prestamos">
         <form id="form-prestamos" autocomplete="off">
+
+          <div class="form-floating mb-4">
+            <input type="date" class="form-control" placeholder="fecha" id="fechaCreacion" name="fechaCreacion" required>
+            <label for="fecha_creacion">libro</label>
+            
+          </div>
+
             <div class="form-floating mb-4">
                 <input list="datalist-prestamos" class="form-control" placeholder="Libro" id="input-libro-prestamo" name="idlibro_lbr" required>
                 <label for="fecha_creacion">libro</label>
@@ -59,6 +87,11 @@
 
       </main>
 
+
+       <!-- JavaScript bootstrap -->
+       <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
+  
+      <!-- JavaScript interactions -->
       <script src="../javaScript/prestamos.js" type ='module'></script>
 </body>
 </html>
