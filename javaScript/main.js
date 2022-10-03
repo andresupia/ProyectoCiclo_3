@@ -111,7 +111,6 @@ i_contenedor.addEventListener('click',()=>{
 
 
 let form_eliminar = document.getElementById('form-eliminar')
-let confirmacion_eliminar = document.getElementById('confirmacion-eliminar-libro')
 form_eliminar.onsubmit = async (e)=>{
     e.preventDefault()
 
@@ -124,14 +123,14 @@ form_eliminar.onsubmit = async (e)=>{
     if(borrarUsuario.status !=200){
         alertas('alert-denied', 'No se ha eliminado  el libro , Intentelo mas tarde')
         div_contenedor_form.classList.remove('open')
-        confirmacion_eliminar.classList.replace('open','close')
+   
     }
     else{
         div_contenedor_form.classList.remove('open')
         alertas('alert-accepted', 'El libro se eliminado correctamente')
         obtenerLibros()
        
-        confirmacion_eliminar.classList.replace('open','close')
+       
     }
 }
 
@@ -224,7 +223,7 @@ function htmlLibro(elemento){
             <p><span class="text-muted">Cantidad :</span>  <span> ${elemento?.copiasdisp_lbr}</span></p>
             <p><span class="text-muted">Edicción :</span>  <span> ${elemento?.edicion_lbr}</span></p>
             <button class="btn bg-info text-white bottom-editar">Editar</button>
-            <button class=" btn bg-danger text-white float-end boton-eliminar">Eliminar</button>
+           
             </div>
         </details>`
 }
