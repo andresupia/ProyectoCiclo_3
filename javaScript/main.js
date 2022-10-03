@@ -60,7 +60,7 @@ function obtenerLibros(){
 
 obtenerLibros()
 
-datalist_libros(API_LIBRO)
+datalist_libros(API_LIBRO,'list-libros')
 
 async function crear_Y_actualizar_libro(urlApi,id,autor,ediccion,categoria,cantidad,editorial,nombre,mensajeDenied,mensajeAccepted){
     let crearLibroApi = await fetch(urlApi,{
@@ -103,7 +103,8 @@ let datalist = document.getElementById('list-libros')
 i_contenedor.addEventListener('click',()=>{
     datalist.innerHTML=""
     div_contenedor_form.classList.toggle('open')
-    datalist_libros(API_LIBRO)
+    datalist_libros(API_LIBRO,'list-libros')
+    input_eliminar.value = ""
 })
 
 
@@ -146,7 +147,7 @@ function editar(){
         e.addEventListener('click',()=>{
 
            
-
+           
             let contenedor_editar = document.getElementById("container-editar-libro")
             contenedor_editar.classList.toggle("open-container-editar")
             
@@ -172,9 +173,9 @@ function editar(){
             let form_editar = document.getElementById("form-editar-libro")
             form_editar.onsubmit= async (evento)=>{
                 evento.preventDefault()
-
+                datalist.innerHTML = ""
                 contenedor_libros.innerHTML=""
-        
+                
                 
                 e.parentElement.parentElement.children[0].textContent  = nuevo_nombre.value
 
@@ -205,6 +206,8 @@ function editar(){
 
                 
                 contenedor_editar.classList.remove("open-container-editar")
+
+                datalist_libros(API_LIBRO,'list-libros')
 
             }           
         })
@@ -282,7 +285,7 @@ form_añadir.onsubmit = async (e)=>{
                 
                 crear_Y_actualizar_libro(API_LIBRO,0,valor_autor_libro,valor_ediccion,valor_categoria
                 ,valor_cantidad,valor_editorial,valor_nombre,'El libro no se a agregado correctamente , intentelo de nuevo' ,'El libro ha sido agregado con exito' )  
-                datalist_libros(API_LIBRO)
+                datalist_libros(API_LIBRO , 'list-libros')
             }   
             
             
