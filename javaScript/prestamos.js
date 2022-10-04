@@ -27,9 +27,6 @@ function obtenerPrestamos(url){
                 <p><span class="text-muted">fecha de actualizacion :</span> <span>${e.fechaActualizacion}</span> </p>
                 <p><span class="text-muted">Autor:</span>  <span>${e.fkLibro.autor_lbr}</span></p>
                 <p><span class="text-muted">Categoria:</span>  <span>${e.fkLibro.categoriaLbr}</span></p>
-    
-                <button class="btn bg-info text-white bottom-editar">Editar</button>
-               
                 </div>
         </datails>`
         })
